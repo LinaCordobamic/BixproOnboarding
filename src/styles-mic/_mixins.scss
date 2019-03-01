@@ -28,13 +28,13 @@
 ---------- Mixins ---------
 ----------------------------*/
 @mixin desktop-up {
-    @media only screen and (min-width: 1200px) {
+    @media only screen and (min-width: 1381px) {
     @content;
     }
 }
 
-@mixin desktop {
-    @media only screen and (max-width: 1200px) {
+@mixin desktop-down {
+    @media only screen and (max-width: 1380px) {
     @content;
     }
 }

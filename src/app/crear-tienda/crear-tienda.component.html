@@ -1,14 +1,19 @@
 
 <section class="onBoarding">
-<div class="container-fluid">
+
+  <img class="nubes" src="../../assets/imagenes/nubes.svg" [ngClass]="{ 'nubes' : !stateFlag , 'd-none' : stateFlag }">
+  <img class="buy" src="../../assets/imagenes/buy.svg" [ngClass]="{ 'buy' : !stateFlag , 'd-none' : stateFlag }">
+ 
+
+<div [ngClass]="{ 'container' : !stateFlag , 'container-fluid' : stateFlag }">
   <div class="row">
-    <div class="col-sm-12 col-12 col-form" [ngClass]="{ 'col-lg-12 col-md-12' : !stateFlag , 'col-lg-7 col-md-12' : stateFlag }">
+    <div class="col-sm-12 col-12 col-form" [ngClass]="{ 'col-lg-12 col-md-12 text-center' : !stateFlag , 'col-lg-7 col-md-12' : stateFlag }">
 
       <div class="wrapper">
 
     
      <img class="logo" src="./assets/imagenes/logov2.svg">
-     <h2 class="titulo">Vende fácil y rápido en línea</h2>
+     <h2 class="titulo animated fadeIn">Vende fácil y rápido en línea</h2>
      <p class="subtitulo">Venda sus productos
         fácil y rápido por
         internet o en su
@@ -22,24 +27,20 @@
                     <mat-horizontal-stepper linear #stepper>
                       <mat-step [stepControl]="firstFormGroup">
                         <form [formGroup]="firstFormGroup" class="form-step-one">
-
-                          
-
-    
                           <ng-template matStepLabel>Correo electrónico</ng-template>
 
                         
 
                         <div class="form-group">
-                          <img src="../../assets/imagenes/mail.svg">
-                          <mat-form-field>
+                         <!-- <img src="../../assets/imagenes/mail.svg">-->
+                          <mat-form-field appearance="fill">
                               <mat-label>Correo electrónico</mat-label>
                             <input ngModel matInput placeholder="micorreo@correo.com" formControlName="correoCtrl">
-                          
+                            <mat-icon matSuffix class="input-icon">mail</mat-icon>
                             <mat-error class="badge badge-pill badge-danger animated fadeInUp"
                             *ngIf="firstFormGroup.controls.correoCtrl.invalid && enviar">
                             {{getError(firstFormGroup,'correoCtrl')}}</mat-error>
-                            <mat-icon matSuffix *ngIf="firstFormGroup.controls.correoCtrl.valid">
+                            <mat-icon class="check-icon animated fadeInUp" matSuffix *ngIf="firstFormGroup.controls.correoCtrl.valid">
                             check
                             </mat-icon>
                           </mat-form-field>
@@ -47,61 +48,68 @@
                        
 
                         <div class="form-group">
-                            <img src="../../assets/imagenes/smartphone.svg">
+                            <!--<img src="../../assets/imagenes/smartphone.svg">-->
 
-                         
-                          <mat-form-field>
-                              <input matInput placeholder="Celular" formControlName="celularCtrl">
-                             
+                          <mat-form-field appearance="fill">
+                              <mat-label>Número telefónico</mat-label>
+                              <input matInput placeholder="(+57)123.." formControlName="celularCtrl">
+                              <mat-icon matSuffix class="input-icon">call</mat-icon>
                               <mat-error class="badge badge-pill badge-danger animated fadeInUp"
                             *ngIf="firstFormGroup.controls.celularCtrl.invalid && enviar ">
                             {{getError(firstFormGroup,'celularCtrl')}}</mat-error>
-                            <mat-icon matSuffix *ngIf="firstFormGroup.controls.celularCtrl.valid">
+                            <mat-icon matSuffix class="check-icon animated fadeInUp" *ngIf="firstFormGroup.controls.celularCtrl.valid">
                                 check
                             </mat-icon>
                             </mat-form-field>
                           </div>
 
-                          <div>
-                            <button mat-button matStepperNext class="btn-primario" (click)='enviar=true'>Enviar</button>
+                          <div class="wrapper-nav-buttons">
+                            <button mat-button matStepperNext class="btn btn-secundario" (click)='enviar=true'>Enviar</button>
                           </div>
                         </form>
                       </mat-step>
                       <mat-step [stepControl]="secondFormGroup">
                         <form [formGroup]="secondFormGroup" class="form-step-two">
                           <ng-template matStepLabel>Fill out your address</ng-template>
-                          <h3>Gracias!</h3>
-                          <p>Estás a un sólo paso de crear tu tienda, hemos enviado un <strong>Código de verificación</strong> a tu correo</p>
-                          <p>Código</p>
+                          <img class="img-header" src="../../assets/imagenes/store.svg">
+                          <p>Estás a un sólo paso de crear tu tienda, hemos enviado un <strong class="negro">Código de verificación</strong> a tu correo</p>
+                          <h2 class="bold">Código</h2>
                           <div class="wrapper-code">
-                            <mat-form-field>
+                            <mat-form-field appearance="fill">
                                 <input matInput maxLength="6">
                               </mat-form-field>
                             </div>
-                          <div>
-                            <button mat-button matStepperPrevious>Atrás</button>
-                            <button mat-button matStepperNext (click)="stateFlag = !stateFlag">Configurar mi tienda</button>
+                          <div class="wrapper-nav-buttons">
+                            <button mat-button matStepperPrevious class="btn btn-light">Atrás</button>
+                            <button mat-button matStepperNext (click)="stateFlag = !stateFlag" class="btn btn-secundario">Configurar mi tienda</button>
                           </div>
                         </form>
                       </mat-step>
                       <mat-step>
+                        <form class="form-step-three">
                         <ng-template matStepLabel>Datos de la tienda</ng-template>
 
-                        <mat-form-field>
-                          <input type="text" matInput placeholder="Nombre de la tienda" required>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Nombre de la tienda</mat-label>
+                            <mat-icon matSuffix class="input-icon">store</mat-icon>
+                          <input type="text" matInput placeholder="Mi tienda">
+                          
                         </mat-form-field>
 
-                        <mat-form-field>
-                          <textarea matInput placeholder="Descripción de la tienda"></textarea>
+                        <mat-form-field appearance="fill" class="edit">
+                            <mat-label>Descripción de la tienda</mat-label>
+                          <textarea matInput placeholder="Mi tienda se vende..."></textarea>
+                          <mat-icon matSuffix class="input-icon">edit</mat-icon>
                         </mat-form-field>
 
-                        <h3>¿A qué sector pertenece tu tienda?</h3>
-                        <div class="wrapper-select">
+                        <h4 class="gris bold">¿A qué sector pertenece tu tienda?</h4>
+                        <div class="wrapper-select" appearance="fill">
                           <div class="form-group">
                             
                           </div>
-                          <mat-form-field>
-                            <mat-select placeholder="Elije un sector">
+                          <mat-form-field appearance="fill" class="select">
+                              <mat-label>Sector industrial al que pertenece</mat-label>
+                            <mat-select placeholder="Elige un sector">
                                 <mat-option value="option">Animales y mascotas</mat-option>
                                 <mat-option value="option">Automotores y accesorios</mat-option>
                                 <mat-option value="option">Bienes raíces</mat-option>
@@ -120,9 +128,10 @@
                         </div>
 
                         <div>
-                          <button mat-button matStepperPrevious (click)="stateFlag = !stateFlag">Atrás</button>
-                          <button mat-button (click)="stepper.reset()">Crear tienda</button>
+                          <button mat-button matStepperPrevious (click)="stateFlag = !stateFlag" class="btn btn-light">Atrás</button>
+                          <button mat-button (click)="stepper.reset()" class="btn btn-secundario">Crear tienda</button>
                         </div>
+                      </form>
                       </mat-step>
                     </mat-horizontal-stepper>
 
@@ -130,13 +139,40 @@
             </ngb-tab>
             <ngb-tab>
               <ng-template ngbTabTitle>Precios</ng-template>
-              <ng-template ngbTabContent>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.
-                <p>Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table
-                craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl
-                cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia
-                yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean
-                shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero
-                sint qui sapiente accusamus tattooed echo park.</p>
+              <ng-template ngbTabContent>
+
+                <div class="row" class="precios">
+               
+
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                      <div class="tarjeta">
+                        <div class="encabezado">
+                          <img src="../../assets/imagenes/plan-descubre.svg">
+                          <h3 class="titulo">Plan descubre</h3>
+                          <p class="precio">$0 / mes</p>
+                        </div>
+                        <ul class="lista">
+                          <li><mat-icon>shopping_cart</mat-icon>Hasta 10 productos</li>
+                          <li><mat-icon>check</mat-icon>Carrito de pedidos</li>
+                          <li><mat-icon>beenhere</mat-icon>Certificado de seguridad</li>
+                          <li><mat-icon>check</mat-icon>Dominio tutienda.bixpro.co</li>
+                          <li><mat-icon>list</mat-icon>Administrador de pedidos</li>
+                          <li><mat-icon>check</mat-icon>Amigable con dispositivos móviles</li>
+                          <li><mat-icon>check</mat-icon>10 pedidos al mes</li>
+                          <li><mat-icon>perm_identity</mat-icon>Gestiona hasta 1 usuario</li>
+                          <li class="adicional">Servicios adicionales</li>
+                          <li class="dominio"><span class="negro bold">Dominio.com $119.000</span> </li>
+  
+                        </ul>
+                      </div>
+                    </div>
+
+
+                    
+               
+                </div>
+
+            
               </ng-template>
             </ngb-tab>
          
@@ -144,10 +180,12 @@
 
         </div>
 
+     
+
     </div>
 
-    <div class="col-lg-5 d-lg-block d-md-none d-sm-none d-none col-carousel" [ngClass]="{ 'd-none-col-carousel' : !stateFlag , 'd-block-col-carousel' : stateFlag }" style="background:red">
-      columna derecha
+    <div class="col-lg-5 d-lg-block d-md-none d-sm-none d-none col-carousel" [ngClass]="{ 'd-none-col-carousel' : !stateFlag , 'd-block-col-carousel' : stateFlag }">
+      
     </div>
   </div>
 </div>

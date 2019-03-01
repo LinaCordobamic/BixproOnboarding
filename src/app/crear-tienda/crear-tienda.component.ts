@@ -32,10 +32,10 @@ export class CrearTiendaComponent implements OnInit {
       
       switch (keysErrors[0]) {
       case "required":
-      return "Ups! te hace falta este campo";
+      return "Necesitamos este campo para que puedas crear tu tienda :)";
       
       case "email":
-      return "Ups! verifica que el formato de correo esté escrito correctamente";
+      return "Verifica que el formato de correo esté escrito correctamente";
   
       }
       }
