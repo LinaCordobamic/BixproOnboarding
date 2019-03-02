@@ -7,6 +7,7 @@ import { SharedModule } from './shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { CrearTiendaComponent } from './crear-tienda/crear-tienda.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,10 +20,12 @@ import { CrearTiendaComponent } from './crear-tienda/crear-tienda.component';
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
+    CarouselModule
 
 
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [CarouselModule]
 })
 export class AppModule { }

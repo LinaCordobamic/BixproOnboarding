@@ -5,7 +5,7 @@ import { CrearTiendaComponent } from './crear-tienda.component';
 @NgModule({
   declarations: [CrearTiendaComponent],
   imports: [
-    CommonModule
+    CommonModule,
   ]
 })
 export class CrearTiendaModule { }

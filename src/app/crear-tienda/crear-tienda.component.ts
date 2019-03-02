@@ -10,6 +10,8 @@ export class CrearTiendaComponent implements OnInit {
   secondFormGroup: FormGroup;
   stateFlag = true;
   enviar= false;
+
+
   constructor(private _formBuilder: FormBuilder) {
   
   }
@@ -23,6 +25,62 @@ export class CrearTiendaComponent implements OnInit {
       secondCtrl: ''
     });
   }
+
+  title = 'angularowlslider';
+  customOptions: any = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: true,
+    navSpeed: 700,
+    navText: ['', ''],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 1
+      },
+      740: {
+        items: 1
+      },
+      940: {
+        items: 1
+      }
+    },
+    nav: false
+  }
+
+
+  customdosOptions: any = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: true,
+    autoplay: true,
+    autoplayTimeout: 8500,
+    navText: ['', ''],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 1
+      },
+      740: {
+        items: 1
+      },
+      940: {
+        items: 1
+      }
+    },
+    nav: false
+  }
+
+
+
 
     getError(form: any, control) {
       let errors = form.controls[control].errors;

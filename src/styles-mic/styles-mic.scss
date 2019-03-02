@@ -46,9 +46,9 @@
     html {--font-size: 1!important}
     body {
     font-family: $font-family-main;
-    font-size: calc(var(--font-size) * 1.1em)!important;
+    font-size: calc(var(--font-size) * 1.2em)!important;
     overflow-x: hidden;
-    @include desktop-down {  font-size: calc(var(--font-size) * 1em)!important;}
+    @include desktop-down {  font-size: calc(var(--font-size) * 1.1em)!important;}
     }
 
     h1,h2,h3,h4,h5,h6,p,ul,li,span,a,button,div {
@@ -69,7 +69,9 @@
    .negro {color:$negro!important}
    .gris{color:$gris!important}
    .primario {color:$primario!important}
+   .secundario {color:$secundario!important}
    .d-none {display: none!important}
+   .d-block {display: block!important}
 
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
@@ -106,9 +108,9 @@ input:-webkit-autofill:active  {
 }
 
 .btn {
-  font-size:.9rem;
-  padding: 6px 30px!important;
-  @include smartphone-down {padding:4px 20px!important}
+  span {font-size:1.1rem!important;}
+  padding: 10px 30px!important;
+  @include smartphone-down {padding:5px 20px!important}
 }
 .btn-primario {
   background:$primario;
@@ -131,21 +133,38 @@ input:-webkit-autofill:active  {
  /* ONBOARDING*/
 
 
-    .nubes {
-      position: absolute;
-      top: -10%;
-      width: 40%;
-      left: 25%;
-      @include smartphone-down {width:70%;left:15%;top:-5%}
-    }
+  
 
     .buy {
       position: absolute;
       bottom: 0%;
       width: 18%;
       left:0%;
-      @include laptop-down {width:10%}
-      @include smartphone-down {display:none}
+      @include laptop-down {display:none}
+
+    }
+
+    .bg-form-left {
+      position: absolute;
+      bottom: 8%;
+      width:150px;
+      left: -5%;
+      z-index:-1;
+      @include laptop-down {    
+       display:none
+      }
+    }
+
+    
+    .bg-form-right {
+      position: absolute;
+      bottom: 8%;
+      width:150px;
+      right: -5%;
+      z-index:-1;
+      @include laptop-down {    
+        display:none
+       }
     }
 
 
@@ -153,7 +172,7 @@ input:-webkit-autofill:active  {
     .onBoarding {
         position: relative;
         @include tablet-down {height:auto;padding:2rem 0rem}
-        .row {align-items: center}
+        .row {align-items: center;height:100vh}
         .col-form {
             @include transition-slow;
           
@@ -166,11 +185,52 @@ input:-webkit-autofill:active  {
         }
         .col-carousel {
           height:100vh;
+          padding-right:0px!important;
           @include transition-slow;
-          background: url(https://image.freepik.com/free-photo/woman-enjoy-online-shopping_53876-30368.jpg);
+          position: relative;
+        }
+
+        .bg-slide-1 {
+          background:url(./assets/imagenes/login-bg.jpg);
           background-size:cover;
           background-position: center center;
+          height: 100vh; 
         }
+
+        .bg-slide-2 {
+          background:url(./assets/imagenes/slide-2-bg.svg);
+          background-size:cover;
+          background-position: center center;
+          height: 100vh; 
+        }
+
+        .bg-slide-3 {
+          background:url(./assets/imagenes/slide-3-bg.svg);
+          background-size:cover;
+          background-position: center center;
+          height: 100vh; 
+        }
+
+        .caption {
+          position:absolute;bottom:25%;z-index:99;text-align:center;width:100%;padding:0px 20px;
+          h2 {font-size:200%;font-weight:600}
+          p {font-size:110%}
+          h2,p {color:white;}
+
+          .img-caption {width: 60%;
+            margin: 0 auto;margin-bottom:1rem}
+        }
+
+        .carousel-dos .owl-dots {
+          position: absolute!important;bottom:5%!important;
+          width:100%!important
+        }
+
+        .carousel-dos .owl-theme .owl-dots .owl-dot.active span {
+          background:$secundario
+        }
+
+  
      
        @include laptop-up {
          .d-none-col-carousel {display:none!important}
@@ -180,12 +240,14 @@ input:-webkit-autofill:active  {
        .footer {
         text-align: center;
         font-size: 80%;
+        margin-top:2rem;
         @include tablet-down {display:none}
         a {@include transition-slow;color:$primario}
        }
 
        .wrapper {
-         padding:5rem;
+         margin:5rem;
+         position: relative;
          @include desktop-down {padding:1rem;text-align: center;}
          @include smartphone-down {padding:0rem}
          .titulo {color:$negro;margin:4rem 0rem 1rem 0rem;font-weight:600;
@@ -204,9 +266,9 @@ input:-webkit-autofill:active  {
           ngb-tabset {width:100%;}
           ngb-tabset .tab-content {
             padding-top:3rem;
-            height:400px;
+            height:auto;
             border: none;
-            @include desktop-down{padding-top:1rem;height:50vh}}
+            @include desktop-down{padding-top:1rem;height:auto}}
           .nav-tabs {border:none;@include desktop-down{justify-content: center!important}}
           .nav-tabs .nav-item {margin-right:5px;}
           .nav-tabs .nav-item .nav-link {
@@ -308,33 +370,49 @@ input:-webkit-autofill:active  {
               }
        }
 
+    
        .form-step-three {
-         .mat-form-field{display:block;@include desktop-down {width:50%;margin:0 auto};@include laptop-down {width:100%}}
+
+        
+        
+        .wrapper-step-three {
+          padding: 50px 40px;
+          background: white;
+          border-radius: 10px;
+          height:100%;
+          margin:0px;
+          border:1px solid #efefef;
+          @include laptop-down {border:none;padding:0px}
+        }
+         .mat-form-field{display:block;@include desktop-down {width:90%;margin:0 auto};@include laptop-down {width:100%}}
          .mat-form-field-wrapper{padding-bottom: 20px;}
          textarea {resize: none;overflow-y:hidden}
-         .select .mat-form-field-wrapper {@include desktop-down{width:50%;margin:0 auto};;@include laptop-down {width:100%}}
+         .select .mat-form-field-wrapper {@include desktop-down{width:90%;margin:0 auto};;@include laptop-down {width:100%}}
+      
        }
 
        /* PRECIOS*/
        .precios {
-         padding: 0rem 4rem;
+         padding: 0rem 1rem;
          @include desktop-down {padding:0rem 2rem}
          @include laptop-down {padding:0rem .5rem}
          ul, li {list-style: none!important;padding-left:0px};
          .tarjeta {
           border: 1px solid #ededed;
-          border-radius: 0px 10px 10px 0px;
+          border-radius: 10px;
           padding: 15px 20px 10px 20px;
-          border-left: 3px solid $secundario;
+          box-shadow:0px 0px 0px 2px #efefef;
           display: flex;
           text-align: left;
-          margin-bottom: 2rem;
+          margin:8px;
+          background: white;
           @include smartphone-down {
             display:block;
             border-left:1px solid #ededed;
-            border-top:2px solid $secundario;
+            border-top:2px solid $primario;
             border-radius: 0px 0px 10px 10px;
             padding: 25px 20px 10px 20px;
+            box-shadow:none
           }
          }
 
@@ -342,8 +420,10 @@ input:-webkit-autofill:active  {
            img {
             width: 50px;
            }
-          .titulo {color:$secundario;font-weight:800;margin:0px;margin-top:10px;margin-bottom:0px}
-          .precio {color:$primario;font-size:135%;margin-top:10px;font-weight:600}
+          .titulo {color:$negro;font-weight:800;margin:0px;margin-top:10px;margin-bottom:0px}
+          .precio {color:$gris;font-size:135%;margin-top:0px;font-weight:400; span {font-size:80%;font-weight:300}}
+          .adicional {margin-top:10px;color:$primario;margin-bottom:0px}
+
           flex:1;
           margin-right:3rem;
           display:flex;
@@ -368,10 +448,10 @@ input:-webkit-autofill:active  {
            li {
             line-height: 2;
             border-bottom: 1px solid #ededed;
+            .no-border-b {border-bottom:none}
            }
           
-           .adicional {border-bottom:none;margin-top:10px;color:$primario}
-           .dominio {border-bottom:none}
+         
          }
        }
      
