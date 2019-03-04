@@ -119,43 +119,34 @@
                           <button class="box-store">
                               <img alt="Paso 3, Elige el sector de tu tienda en línea" src="../../assets/imagenes/card-icon.svg">
                               <h4>Alimentos y/o consumibles</h4>
-                              <p>Supermercados, medicina y farmacias, alimentos y bebidas</p>
+                              <p>Supermercados, farmacias, alimentos y bebidas</p>
                           </button>
 
 
                           <button class="box-store">
                             <img alt="Paso 3, Elige el sector de tu tienda en línea" src="../../assets/imagenes/card-icon2.svg">
                             <h4>Accesorios en general</h4>
-                            <p>mascotas, moda, tecnología, bienes raices otros </p>
+                            <p>Mascotas, moda, belleza, tecnología, bienes raices</p>
                         </button>
+
+
+                        <button class="box-store">
+                            <img class="img-three" alt="Paso 3, Elige el sector de tu tienda en línea" src="../../assets/imagenes/otro-icon.svg">
+                            <h4>Otros sectores</h4>
+                            <mat-form-field appearance="fill">
+                                <mat-label>¿ Cuál ?</mat-label>
+                                <mat-icon matSuffix class="input-icon">shopping_cart</mat-icon>
+                              <input type="text" matInput placeholder="">
+                            </mat-form-field>
+                        </button>
+
+
                         </div>
-                        <div class="wrapper-select" appearance="fill">
-                          <div class="form-group">
-                            
-                          </div>
-                         <!--<mat-form-field appearance="fill" class="select">
-                              <mat-label>Sector industrial al que pertenece</mat-label>
-                            <mat-select placeholder="Elige un sector">
-                                <mat-option value="option">Animales y mascotas</mat-option>
-                                <mat-option value="option">Automotores y accesorios</mat-option>
-                                <mat-option value="option">Bienes raíces</mat-option>
-                                <mat-option value="option">Cosmética y belleza</mat-option>
-                                <mat-option value="option">Moda</mat-option>
-                                <mat-option value="option">Viajes y hotelería</mat-option>
-                                <mat-option value="option">Venta minorista</mat-option>
-                                <mat-option value="option">Alimentos y bebidas</mat-option>
-                                <mat-option value="option">Supermercados</mat-option>
-                                <mat-option value="option">Medicina y farmacia</mat-option>
-                                <mat-option value="option">Otro</mat-option>
-                            </mat-select>
-                        
-                          </mat-form-field>
---> 
-                        </div>
+                     
 
                         <div class="wrapper-nav-buttons">
                          <!-- <button mat-button matStepperPrevious (click)="stateFlag = !stateFlag" class="btn btn-light">Atrás</button>-->
-                          <button mat-button (click)="stepper.reset()" class="btn btn-secundario">Ir a mi tienda</button>
+                          <button mat-button (click)="showLoading()" class="btn btn-secundario">Ir a mi tienda</button>
                         </div>
 
                       </div>

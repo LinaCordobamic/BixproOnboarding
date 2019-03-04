@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators, FormsModule} from '@angular/forms';
+import Swal from 'sweetalert2'
+
+
 @Component({
   selector: 'app-crear-tienda',
   templateUrl: './crear-tienda.component.html',
@@ -17,6 +20,7 @@ export class CrearTiendaComponent implements OnInit {
   
   }
 
+   /* VALIDATION*/
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
       correoCtrl: ['',Validators.compose([Validators.required,Validators.email])],
@@ -26,7 +30,7 @@ export class CrearTiendaComponent implements OnInit {
       secondCtrl: ''
     });
   }
-
+/* owl carousel columna derecha*/
   title = 'angularowlslider';
   customOptions: any = {
     loop: true,
@@ -55,7 +59,7 @@ export class CrearTiendaComponent implements OnInit {
     nav: false
   }
 
-
+/* owl carousel planes*/
   customdosOptions: any = {
     loop: true,
     mouseDrag: true,
@@ -83,7 +87,7 @@ export class CrearTiendaComponent implements OnInit {
   }
 
 
-
+ /* VALIDATION - mensajes de error*/
 
     getError(form: any, control) {
       let errors = form.controls[control].errors;
@@ -101,4 +105,18 @@ export class CrearTiendaComponent implements OnInit {
       }
       }
 
+      /*SWEEtALERT */
+
+      showLoading() { 
+        Swal.fire (
+          {
+            html: 'Enviando datos <strong></strong> ...',
+            timer: 10000,
+            customClass: 'alert-onboarding'
+            
+          }
+        )
+    
+        Swal.showLoading()
+      }
 }

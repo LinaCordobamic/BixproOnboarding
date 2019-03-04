@@ -334,7 +334,10 @@ input:-webkit-autofill:active  {
 
        .form-step-two {
             text-align:center;
-           
+            .mat-form-field-wrapper, .mat-form-field-flex {background:#efefef}
+            .mat-form-field-flex {border-bottom: 1px solid #dadada;border-left: 1px solid #dadada;@include transition-slow}
+            .mat-focused .mat-form-field-flex {border-bottom:1px solid#dadada;border-left: 1px solid #dadada}
+  
             .img-header {
               width: 90px;
               height: auto;
@@ -361,6 +364,8 @@ input:-webkit-autofill:active  {
           @include desktop-down{width:70%;margin:0 auto}
           @include laptop-down {width:100%}
         }
+
+ 
   
         .link-inicio{ cursor: pointer;text-decoration: underline!important;font-size:95%}
         h4:first-child {margin-top:20px}
@@ -369,7 +374,7 @@ input:-webkit-autofill:active  {
           margin:.5rem 2rem 2rem 2rem;
           @include flexbox;
           @include align-items(center);
-          @include tablet-down {display:block;margin:0rem}
+          @include laptop-down {display:block;margin:0rem}
           .box-store {
             @include transition-slow;
             background: #ffffff;
@@ -381,7 +386,13 @@ input:-webkit-autofill:active  {
             margin: 10px;
             height:280px;
             @include desktop-down {height:250px}
-            @include laptop-down {height:auto;}
+            @include laptop-down {height:260px;width:28.5%}
+            @include tablet-down {
+              width: 100%;
+              height: auto;
+              margin: 0px;
+              margin-bottom: 20px;
+          }
             flex:1;
             cursor: pointer;
             &.active, &:focus, &:hover {
@@ -394,13 +405,17 @@ input:-webkit-autofill:active  {
 
             img {
               display: block;
-              max-width: 22%;
+              width: 90px;
               height: auto;
               margin: 0 auto;
               @include desktop-down {
-                max-width:20%
+                width:65px
               }
             }
+
+            .mat-form-field {width:100%}
+
+           
           }
         }
         
@@ -487,5 +502,3 @@ input:-webkit-autofill:active  {
        }
      
     }
-  
-  

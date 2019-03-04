@@ -10,4 +10,7 @@ npm install --save hammerjs
 /* owl carousel  */
 npm i ngx-owl-carousel-o
 
+/* SWEETALERT2*/
+npm install sweetalert2
+
 
