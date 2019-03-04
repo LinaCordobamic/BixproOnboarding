@@ -9,6 +9,7 @@ export class CrearTiendaComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   stateFlag = true;
+  hideText = false;
   enviar= false;
 
 
@@ -33,6 +34,8 @@ export class CrearTiendaComponent implements OnInit {
     touchDrag: true,
     pullDrag: true,
     dots: true,
+    autoplay: true,
+    autoplayTimeout: 5500,
     navSpeed: 700,
     navText: ['', ''],
     responsive: {
@@ -60,7 +63,7 @@ export class CrearTiendaComponent implements OnInit {
     pullDrag: true,
     dots: true,
     autoplay: true,
-    autoplayTimeout: 8500,
+    autoplayTimeout: 4500,
     navText: ['', ''],
     responsive: {
       0: {

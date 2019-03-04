@@ -123,51 +123,18 @@ input:-webkit-autofill:active  {
   span {color:white}
 }
 
-.btn-light {background:#ededed;margin-right:20px!important;
+.btn-light {background:#dadada;margin-right:20px!important;
   @include smartphone-down{margin-right:0px!important;margin-bottom:10px!important;width:100%!important}}
 
 .check-icon {color:$terciario!important;font-weight:900}
-.input-icon {color:$secundario!important}
+.input-icon {color:#cecece!important}
 .edit .mat-form-field-suffix {top:-15px!important}
 .edit .mat-form-field-infix {padding:0rem}
  /* ONBOARDING*/
 
 
-  
 
-    .buy {
-      position: absolute;
-      bottom: 0%;
-      width: 18%;
-      left:0%;
-      @include laptop-down {display:none}
-
-    }
-
-    .bg-form-left {
-      position: absolute;
-      bottom: 8%;
-      width:150px;
-      left: -5%;
-      z-index:-1;
-      @include laptop-down {    
-       display:none
-      }
-    }
-
-    
-    .bg-form-right {
-      position: absolute;
-      bottom: 8%;
-      width:150px;
-      right: -5%;
-      z-index:-1;
-      @include laptop-down {    
-        display:none
-       }
-    }
-
-
+   
 
     .onBoarding {
         position: relative;
@@ -179,12 +146,12 @@ input:-webkit-autofill:active  {
             @include laptop-down {text-align: center}
             @include smartphone-down {height:auto}
             .wrapper-select {
-              display:flex;
+              @include flexbox;
               .mat-form-field {flex:1}
             }
         }
         .col-carousel {
-          height:100vh;
+          height:100%;
           padding-right:0px!important;
           @include transition-slow;
           position: relative;
@@ -248,14 +215,17 @@ input:-webkit-autofill:active  {
        .wrapper {
          margin:5rem;
          position: relative;
-         @include desktop-down {padding:1rem;text-align: center;}
-         @include smartphone-down {padding:0rem}
-         .titulo {color:$negro;margin:4rem 0rem 1rem 0rem;font-weight:600;
+         @include desktop-down {padding:1rem;text-align: center;margin:1.5rem}
+         @include laptop-down {margin:2rem}
+         @include smartphone-down {padding:0rem;margin:0rem}
+         .titulo {color:$negro;margin:1rem 0rem 1rem 0rem;font-weight:600;
           @include desktop-down{margin:2rem 0rem 1rem 0rem;line-height: 1.1;}
+          @include smartphone-down {font-size:130%}
         }
          .subtitulo {
            color:$gris;margin-bottom:3rem;
            @include desktop-down {margin-bottom:1rem};
+           @include smartphone-down {font-size:90%}
            @media only screen and (max-width:320px){display:none}
           }
           .logo {width:180px;height:auto;@include desktop-down {width:150px;height:auto}}
@@ -269,7 +239,7 @@ input:-webkit-autofill:active  {
             height:auto;
             border: none;
             @include desktop-down{padding-top:1rem;height:auto}}
-          .nav-tabs {border:none;@include desktop-down{justify-content: center!important}}
+          .nav-tabs {border:none;margin-top:20px;@include desktop-down{justify-content: center!important}}
           .nav-tabs .nav-item {margin-right:5px;}
           .nav-tabs .nav-item .nav-link {
             padding: 1rem 2rem;
@@ -315,17 +285,30 @@ input:-webkit-autofill:active  {
             @include laptop-down {background:white}
           }
           .btn-secundario {@include smartphone-down {width:100%}}
+          input.mat-input-element {color:$negro!important}
+          .mat-form-field-flex {border-bottom: 1px solid #dadada;border-left: 3px solid $secundario;@include transition-slow}
+          .mat-focused .mat-form-field-flex {border-bottom:1px solid#dadada;border-left: 3px solid $primario}
 
       
        }/* FIN WRAPPER*/
+       .mat-form-field.mat-focused .mat-form-field-label {color:$gris}
       .mat-form-field-flex {border-radius:4px!important;@include transition-slow}
-       .mat-form-field-suffix {display:flex; mat-icon:first-child {margin-right:10px}}
+       .mat-form-field-suffix {@include flexbox; mat-icon:first-child {margin-right:10px}}
+       .mat-form-field-suffix .mat-icon {
+         @include smartphone-down {
+          height: 15px;
+          width: 15px;
+          font-size: 120%;
+         }
+       }
        .mat-form-field-wrapper {padding-bottom: 0px;}
-       .mat-form-field-appearance-fill .mat-form-field-flex {border:1px solid #ededed;background:white;}
-       .mat-focused .mat-form-field-flex {border:1px solid $secundario}
+       .mat-form-field-appearance-fill .mat-form-field-flex {border:1px solid #dadada;background:white;}
+       .mat-focused .mat-form-field-flex {border:1px solid #dadada}
        .form-step-one {
+         background:white;
+         .aviso {font-size:80%;color:$gris;margin-bottom:0px;margin-top:10px}
           .form-group {  position: relative;}
-          .mat-form-field-infix {color:$secundario}
+          .mat-form-field-infix {color:$primario}
          .form-group img {position: absolute;top: 22%;width: 30px;}
          .mat-form-field {
            display:block;
@@ -339,13 +322,12 @@ input:-webkit-autofill:active  {
             @include desktop-down{width:70%;margin:0 auto}
             @include laptop-down {width:100%}
           }
-         .mat-form-field-flex {border-bottom: 1px solid #ededed;border-left: 1px solid #ededed;@include transition-slow}
-         .mat-focused .mat-form-field-flex {border-bottom:1px solid $secundario;border-left: 1px solid $secundario;}
+    
          .mat-form-field-suffix {color: rgba(70, 70, 70, 0.2);}
          .mat-form-field.mat-form-field-invalid .mat-form-field-label {color: $gris;}
           .mat-form-field-appearance-legacy .mat-form-field-suffix .mat-icon {color:#76ffa7}
           .mat-form-field-appearance-legacy .mat-form-field-label {color: $gris}
-          .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {color: $secundario;}
+          .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {color: $primario}
           .mat-form-field.mat-form-field-invalid .mat-form-field-ripple {background-color: #949494;}
           
        }
@@ -359,6 +341,7 @@ input:-webkit-autofill:active  {
               margin-bottom: 10px;}
 
               .wrapper-code {
+                background:white;
                   .mat-form-field {font-size:3rem;font-weight:900;width:50%;text-align: center;
                     @include desktop-down{font-size:2rem}
                     @include smartphone-down {width:100%}
@@ -373,7 +356,53 @@ input:-webkit-autofill:active  {
     
        .form-step-three {
 
-        
+        .btn-secundario {
+          width:100%;
+          @include desktop-down{width:70%;margin:0 auto}
+          @include laptop-down {width:100%}
+        }
+  
+        .link-inicio{ cursor: pointer;text-decoration: underline!important;font-size:95%}
+        h4:first-child {margin-top:20px}
+
+        .wrapper-cards {
+          margin:.5rem 2rem 2rem 2rem;
+          @include flexbox;
+          @include align-items(center);
+          @include tablet-down {display:block;margin:0rem}
+          .box-store {
+            @include transition-slow;
+            background: #ffffff;
+            box-shadow: 1px 2px 12px rgba(131, 130, 130, 0.05);
+            display: inline-block;
+            padding: 20px 15px 20px 15px;
+            border: 2px dotted #dadada;
+            border-radius:5px;
+            margin: 10px;
+            height:280px;
+            @include desktop-down {height:250px}
+            @include laptop-down {height:auto;}
+            flex:1;
+            cursor: pointer;
+            &.active, &:focus, &:hover {
+              background: #fffefa;
+              border: 2px dotted $primario;
+            }
+
+            h4 {font-size:95%;margin-top:2rem;font-weight:bold}
+            p {font-size:80%}
+
+            img {
+              display: block;
+              max-width: 22%;
+              height: auto;
+              margin: 0 auto;
+              @include desktop-down {
+                max-width:20%
+              }
+            }
+          }
+        }
         
         .wrapper-step-three {
           padding: 50px 40px;
@@ -381,7 +410,7 @@ input:-webkit-autofill:active  {
           border-radius: 10px;
           height:100%;
           margin:0px;
-          border:1px solid #efefef;
+          border:2px dotted #efefef;
           @include laptop-down {border:none;padding:0px}
         }
          .mat-form-field{display:block;@include desktop-down {width:90%;margin:0 auto};@include laptop-down {width:100%}}
@@ -394,46 +423,46 @@ input:-webkit-autofill:active  {
        /* PRECIOS*/
        .precios {
          padding: 0rem 1rem;
-         @include desktop-down {padding:0rem 2rem}
+         @include desktop-down {padding:0rem}
          @include laptop-down {padding:0rem .5rem}
          ul, li {list-style: none!important;padding-left:0px};
          .tarjeta {
-          border: 1px solid #ededed;
+          border: none;
           border-radius: 10px;
           padding: 15px 20px 10px 20px;
-          box-shadow:0px 0px 0px 2px #efefef;
-          display: flex;
+          box-shadow:none;
+          @include flexbox;
           text-align: left;
           margin:8px;
           background: white;
           @include smartphone-down {
             display:block;
-            border-left:1px solid #ededed;
-            border-top:2px solid $primario;
-            border-radius: 0px 0px 10px 10px;
+            border-radius: 0px;
             padding: 25px 20px 10px 20px;
-            box-shadow:none
+            box-shadow:none;
+            text-align: center;
           }
          }
 
          .encabezado {
            img {
             width: 50px;
+            @include smartphone-down {margin:0 auto}
            }
           .titulo {color:$negro;font-weight:800;margin:0px;margin-top:10px;margin-bottom:0px}
           .precio {color:$gris;font-size:135%;margin-top:0px;font-weight:400; span {font-size:80%;font-weight:300}}
-          .adicional {margin-top:10px;color:$primario;margin-bottom:0px}
-
+          .adicional {margin-top:10px;color:$primario;margin-bottom:0px;font-size:80%}
+          .dominio {color:$gris;font-size:80%}
           flex:1;
           margin-right:3rem;
-          display:flex;
-          flex-direction: column;
-          justify-content: center;
           padding-left:2rem;
+          @include flexbox;
+          @include flex-direction(column);
+          @include justify-content(center);
           @include tablet-down {margin-right:1rem}
          }
          .lista {
-          font-size:95%;text-align: left;
+          text-align: left;
           flex:2;
 
           mat-icon {
@@ -447,7 +476,9 @@ input:-webkit-autofill:active  {
           
            li {
             line-height: 2;
-            border-bottom: 1px solid #ededed;
+            border-bottom: 1px dotted #d8d8d8;
+            font-size:85%;
+            @include tablet-down {font-size:95%}
             .no-border-b {border-bottom:none}
            }
           

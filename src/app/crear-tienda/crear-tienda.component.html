@@ -4,9 +4,7 @@
 
 <section class="onBoarding">
 
-  <img class="buy" src="../../assets/imagenes/buy.svg" [ngClass]="{ 'buy' : !stateFlag , 'd-none' : stateFlag }">
- 
-
+  
 <div [ngClass]="{ 'container' : !stateFlag , 'container-fluid' : stateFlag }">
   <div class="row">
     <div class="col-sm-12 col-12 col-form" [ngClass]="{ 'col-lg-12 col-md-12 text-center' : !stateFlag , 'col-lg-7 col-md-12' : stateFlag }">
@@ -15,15 +13,18 @@
 
                 
      
-     <img class="logo animated fadeInUp" src="./assets/imagenes/logov2.svg">
-     <h2 class="titulo animated fadeInUp">Tiendas en línea a un sólo click</h2>
-     <p class="subtitulo animated fadeInUp">Venda sus productos
+     <img alt="Bixpro, la forma fácil y segura de vender en internet" class="logo animated fadeInUp" src="./assets/imagenes/logov2.svg">
+     <h2 class="titulo animated fadeInUp" 
+     [ngClass]="{ 'd-block' : !hideText , 'd-none' : hideText }">Tiendas en línea a un sólo click</h2>
+     <p class="subtitulo animated fadeInUp" 
+     [ngClass]="{ 'd-block' : !hideText , 'd-none' : hideText  }">Venda sus productos
         fácil y rápido por
         internet,
         cree y conecte su
         negocio a una tienda en línea</p>
-        <img class="bg-form-left" src="../../assets/imagenes/bg-form-left.svg" [ngClass]="{ 'bg-form-left' : !stateFlag , 'd-none' : stateFlag }">
-        <img class="bg-form-right" src="../../assets/imagenes/bg-form-right.svg" [ngClass]="{ 'bg-form-right' : !stateFlag , 'd-none' : stateFlag }">
+
+      
+      
         <ngb-tabset>
             <ngb-tab title="Crear tu tienda">
               <ng-template ngbTabContent>
@@ -34,11 +35,14 @@
 
                           <ng-template matStepLabel>Correo electrónico</ng-template>
 
-                        
+                          <p class="aviso">Te enviaremos un código de verificación a tu correo para crear tu tienda</p>
 
                         <div class="form-group">
+                       
                       
                           <mat-form-field appearance="fill">
+                           
+
                               <mat-label>Correo electrónico</mat-label>
                             <input ngModel matInput placeholder="micorreo@correo.com" formControlName="correoCtrl">
                             <mat-icon matSuffix class="input-icon">mail</mat-icon>
@@ -46,7 +50,7 @@
                             *ngIf="firstFormGroup.controls.correoCtrl.invalid && enviar">
                             {{getError(firstFormGroup,'correoCtrl')}}</mat-error>
                             <mat-icon class="check-icon animated fadeInUp" matSuffix *ngIf="firstFormGroup.controls.correoCtrl.valid">
-                            check
+                            check_circle
                             </mat-icon>
                           </mat-form-field>
                         </div>
@@ -63,21 +67,21 @@
                             *ngIf="firstFormGroup.controls.celularCtrl.invalid && enviar ">
                             {{getError(firstFormGroup,'celularCtrl')}}</mat-error>
                             <mat-icon matSuffix class="check-icon animated fadeInUp" *ngIf="firstFormGroup.controls.celularCtrl.valid">
-                                check
+                                check_circle
                             </mat-icon>
                             </mat-form-field>
                           </div>
 
                           <div class="wrapper-nav-buttons">
-                            <button mat-button matStepperNext class="btn btn-secundario" (click)='enviar=true'>Enviar</button>
+                            <button mat-button matStepperNext class="btn btn-secundario" (click)='enviar=true;hideText=true'>Crear mi tienda</button>
                           </div>
                         </form>
                       </mat-step>
                       <mat-step [stepControl]="secondFormGroup">
                         <form [formGroup]="secondFormGroup" class="form-step-two">
                           <ng-template matStepLabel>Fill out your address</ng-template>
-                          <img class="img-header" src="../../assets/imagenes/store.svg">
-                          <p>Estás a un sólo paso de crear tu tienda, hemos enviado un <strong class="negro">Código de verificación</strong> a tu correo</p>
+                          <img alt="Paso 2, Crear una tienda en línea con Bixpro" class="img-header" src="../../assets/imagenes/store.svg">
+                          <p>Estás a un sólo paso de crear tu tienda!<br> Hemos enviado un <strong class="negro">Código de verificación a tu correo electrónico</strong></p>
                           <h2 class="bold">Código</h2>
                           <div class="wrapper-code">
                             <mat-form-field appearance="fill">
@@ -85,7 +89,7 @@
                               </mat-form-field>
                             </div>
                           <div class="wrapper-nav-buttons">
-                            <button mat-button matStepperPrevious class="btn btn-light">Atrás</button>
+                            <button mat-button matStepperPrevious class="btn btn-light" (click)='enviar=false;hideText=false'>Atrás</button>
                             <button mat-button matStepperNext (click)="stateFlag = !stateFlag" class="btn btn-secundario">Configurar mi tienda</button>
                           </div>
                         </form>
@@ -93,8 +97,8 @@
                       <mat-step class="step-three">
                         <form class="form-step-three">
                           <div class="wrapper-step-three">
-
-                       
+                            <a class="primario link-inicio" (click)='enviar=false;stepper.reset();stateFlag = !stateFlag;hideText=false'>Regresar al inicio</a>
+                              <h4 class="negro bold" style="margin-top:10px">Por último necesitamos conocer algunos datos de tu tienda</h4>
                         <ng-template matStepLabel>Datos de la tienda</ng-template>
 
                         <mat-form-field appearance="fill">
@@ -110,12 +114,26 @@
                           <mat-icon matSuffix class="input-icon">edit</mat-icon>
                         </mat-form-field>
 
-                        <h4 class="secundario bold">¿A qué sector pertenece tu tienda?</h4>
+                        <h4 class="negro regular">¿A qué sector pertenece tu tienda?</h4>
+                        <div class="wrapper-cards">
+                          <button class="box-store">
+                              <img alt="Paso 3, Elige el sector de tu tienda en línea" src="../../assets/imagenes/card-icon.svg">
+                              <h4>Alimentos y/o consumibles</h4>
+                              <p>Supermercados, medicina y farmacias, alimentos y bebidas</p>
+                          </button>
+
+
+                          <button class="box-store">
+                            <img alt="Paso 3, Elige el sector de tu tienda en línea" src="../../assets/imagenes/card-icon2.svg">
+                            <h4>Accesorios en general</h4>
+                            <p>mascotas, moda, tecnología, bienes raices otros </p>
+                        </button>
+                        </div>
                         <div class="wrapper-select" appearance="fill">
                           <div class="form-group">
                             
                           </div>
-                          <mat-form-field appearance="fill" class="select">
+                         <!--<mat-form-field appearance="fill" class="select">
                               <mat-label>Sector industrial al que pertenece</mat-label>
                             <mat-select placeholder="Elige un sector">
                                 <mat-option value="option">Animales y mascotas</mat-option>
@@ -132,12 +150,12 @@
                             </mat-select>
                         
                           </mat-form-field>
-
+--> 
                         </div>
 
                         <div class="wrapper-nav-buttons">
-                          <button mat-button matStepperPrevious (click)="stateFlag = !stateFlag" class="btn btn-light">Atrás</button>
-                          <button mat-button (click)="stepper.reset()" class="btn btn-secundario">Crear tienda</button>
+                         <!-- <button mat-button matStepperPrevious (click)="stateFlag = !stateFlag" class="btn btn-light">Atrás</button>-->
+                          <button mat-button (click)="stepper.reset()" class="btn btn-secundario">Ir a mi tienda</button>
                         </div>
 
                       </div>
@@ -158,12 +176,12 @@
                           <owl-carousel-o [options]="customOptions">
                           <ng-template carouselSlide> <div class="tarjeta">
                               <div class="encabezado">
-                                <img src="../../assets/imagenes/plan-descubre.svg">
+                                <img alt="Planes Bixpro para tu tienda en línea" src="../../assets/imagenes/plan-descubre.svg">
                                 <h3 class="titulo">Plan Descubre</h3>
                                 <p class="precio">$0 /<span>mes</span></p>
 
                                 <p class="adicional">Servicios adicionales</p>
-                                <p class="dominio"><span class="negro bold">Dominio.com $119.000</span> </p>
+                                <p class="dominio"><span>Dominio.com $119.000</span> </p>
 
                               </div>
                               <ul class="lista">
@@ -182,12 +200,12 @@
                             </div></ng-template>  
                           <ng-template carouselSlide> <div class="tarjeta">
                               <div class="encabezado">
-                                <img src="../../assets/imagenes/plan-emprende.svg">
+                                <img alt="Planes Bixpro para tu tienda en línea" src="../../assets/imagenes/plan-emprende.svg">
                                 <h3 class="titulo">Plan Emprende</h3>
                                 <p class="precio">$55.000 /<span>mes</span></p>
 
                                 <p class="adicional">Servicios adicionales</p>
-                                <p class="dominio"><span class="negro bold">Dominio.com $119.000</span> </p>
+                                <p class="dominio"><span>Dominio.com $119.000</span> </p>
                               </div>
                               <ul class="lista">
                                 <li><mat-icon>shopping_cart</mat-icon>Hasta 50 productos</li>
@@ -205,12 +223,12 @@
                             </div></ng-template>  
                           <ng-template carouselSlide> <div class="tarjeta">
                               <div class="encabezado">
-                                <img src="../../assets/imagenes/plan-avanza.svg">
+                                <img alt="Planes Bixpro para tu tienda en línea" src="../../assets/imagenes/plan-avanza.svg">
                                 <h3 class="titulo">Plan Avanza</h3>
                                 <p class="precio">$80.000 / <span>mes</span></p>
 
                                 <p class="adicional">Servicios adicionales</p>
-                                <p class="dominio"><span class="negro bold">Dominio.com $119.000</span> </p>
+                                <p class="dominio"><span>Dominio.com $119.000</span> </p>
 
                               </div>
                               <ul class="lista">
@@ -233,12 +251,12 @@
 
                             <ng-template carouselSlide> <div class="tarjeta">
                                 <div class="encabezado">
-                                  <img src="../../assets/imagenes/plan-premium.svg">
+                                  <img alt="Planes Bixpro para tu tienda en línea" src="../../assets/imagenes/plan-premium.svg">
                                   <h3 class="titulo">Plan Premium</h3>
                                   <p class="precio">$120.000 / <span>mes</span></p>
 
                                   <p class="adicional">Servicios adicionales</p>
-                                  <p class="dominio"><span class="negro bold">Dominio.com $119.000</span> </p>
+                                  <p class="dominio"><span>Dominio.com $119.000</span> </p>
 
                                 </div>
                                 <ul class="lista">
@@ -302,7 +320,7 @@
                   <div class="bg-slide-2"></div>
 
                   <div class="caption">
-                    <img class="img-caption" src="../../assets/imagenes/slide-2.png">
+                    <img alt="Bixpro, vende en línea con un ecommerce" class="img-caption" src="../../assets/imagenes/slide-2.png">
                     <h2>Venda con un sitio web</h2>
                     <p>Haga presencia en línea a través de un sitio web que destaque sus productos y reciba pedidos, además cree ofertas y descuentos para sus clientes.</p>
                   </div>
@@ -313,7 +331,7 @@
                   <div class="bg-slide-3"></div>
 
                   <div class="caption">
-                    <img class="img-caption" src="../../assets/imagenes/slide-3.png">
+                    <img alt="Bixpro, cree campañas para su tienda en línea" class="img-caption" src="../../assets/imagenes/slide-3.png">
                     <h2>Marketing</h2>
                     <p>Cree campañas de marketing sobre sus poductos o servicios a través del envío masivo de información</p>
                   </div>
