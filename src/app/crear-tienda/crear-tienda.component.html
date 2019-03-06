@@ -1,158 +1,186 @@
-
-
-   
-
 <section class="onBoarding">
 
-  
-<div [ngClass]="{ 'container' : !stateFlag , 'container-fluid' : stateFlag }">
-  <div class="row">
-    <div class="col-sm-12 col-12 col-form" [ngClass]="{ 'col-lg-12 col-md-12 text-center' : !stateFlag , 'col-lg-7 col-md-12' : stateFlag }">
 
-      <div class="wrapper">
+  <div [ngClass]="{ 'container' : !stateFlag , 'container-fluid' : stateFlag }">
+    <div class="row">
+      <div class="col-sm-12 col-12 col-form"
+        [ngClass]="{ 'col-lg-12 col-md-12 text-center' : !stateFlag , 'col-lg-7 col-md-12' : stateFlag }">
 
-                
-     
-     <img alt="Bixpro, la forma fácil y segura de vender en internet" class="logo animated fadeInUp" src="./assets/imagenes/logov2.svg">
-     <h2 class="titulo animated fadeInUp" 
-     [ngClass]="{ 'd-block' : !hideText , 'd-none' : hideText }">Tiendas en línea a un sólo click</h2>
-     <p class="subtitulo animated fadeInUp" 
-     [ngClass]="{ 'd-block' : !hideText , 'd-none' : hideText  }">Venda sus productos
-        fácil y rápido por
-        internet,
-        cree y conecte su
-        negocio a una tienda en línea</p>
+        <div class="wrapper">
 
-      
-      
-        <ngb-tabset>
+
+
+          <img alt="Bixpro, la forma fácil y segura de vender en internet" class="logo animated fadeInUp"
+            src="./assets/imagenes/logov2.svg">
+          <h2 class="titulo animated fadeInUp" [ngClass]="{ 'd-block' : !hideText , 'd-none' : hideText }">Tiendas en
+            línea a un sólo click</h2>
+          <p class="subtitulo animated fadeInUp" [ngClass]="{ 'd-block' : !hideText , 'd-none' : hideText  }">Venda sus
+            productos
+            fácil y rápido por
+            internet,
+            cree y conecte su
+            negocio a una tienda en línea</p>
+
+
+
+          <ngb-tabset>
             <ngb-tab title="Crear tu tienda">
               <ng-template ngbTabContent>
-                    <mat-horizontal-stepper linear #stepper>
-                 
-                      <mat-step [stepControl]="firstFormGroup">
-                        <form [formGroup]="firstFormGroup" class="form-step-one">
+                <mat-horizontal-stepper linear #stepper>
 
-                          <ng-template matStepLabel>Correo electrónico</ng-template>
+                  <mat-step [stepControl]="formProspecto">
+                    <form [formGroup]="formProspecto" class="form-step-one">
 
-                          <p class="aviso">Te enviaremos un código de verificación a tu correo para crear tu tienda</p>
+                      <ng-template matStepLabel>Correo electrónico</ng-template>
 
-                        <div class="form-group">
-                       
-                      
-                          <mat-form-field appearance="fill">
-                           
+                      <p class="aviso">Te enviaremos un código de verificación a tu correo para crear tu tienda</p>
 
-                              <mat-label>Correo electrónico</mat-label>
-                            <input ngModel matInput placeholder="micorreo@correo.com" formControlName="correoCtrl">
-                            <mat-icon matSuffix class="input-icon">mail</mat-icon>
-                            <mat-error class="badge badge-pill badge-danger animated fadeInUp"
-                            *ngIf="firstFormGroup.controls.correoCtrl.invalid && enviar">
-                            {{getError(firstFormGroup,'correoCtrl')}}</mat-error>
-                            <mat-icon class="check-icon animated fadeInUp" matSuffix *ngIf="firstFormGroup.controls.correoCtrl.valid">
-                            check_circle
-                            </mat-icon>
-                          </mat-form-field>
-                        </div>
-                       
+                      <div class="form-group">
 
-                        <div class="form-group">
-                        
-
-                          <mat-form-field appearance="fill">
-                              <mat-label>Número telefónico</mat-label>
-                              <input matInput placeholder="(+57)123.." formControlName="celularCtrl">
-                              <mat-icon matSuffix class="input-icon">call</mat-icon>
-                              <mat-error class="badge badge-pill badge-danger animated fadeInUp"
-                            *ngIf="firstFormGroup.controls.celularCtrl.invalid && enviar ">
-                            {{getError(firstFormGroup,'celularCtrl')}}</mat-error>
-                            <mat-icon matSuffix class="check-icon animated fadeInUp" *ngIf="firstFormGroup.controls.celularCtrl.valid">
-                                check_circle
-                            </mat-icon>
-                            </mat-form-field>
-                          </div>
-
-                          <div class="wrapper-nav-buttons">
-                            <button mat-button matStepperNext class="btn btn-secundario" (click)='enviar=true;hideText=true'>Crear mi tienda</button>
-                          </div>
-                        </form>
-                      </mat-step>
-                      <mat-step [stepControl]="secondFormGroup">
-                        <form [formGroup]="secondFormGroup" class="form-step-two">
-                          <ng-template matStepLabel>Fill out your address</ng-template>
-                          <img alt="Paso 2, Crear una tienda en línea con Bixpro" class="img-header" src="../../assets/imagenes/store.svg">
-                          <p>Estás a un sólo paso de crear tu tienda!<br> Hemos enviado un <strong class="negro">Código de verificación a tu correo electrónico</strong></p>
-                          <h2 class="bold">Código</h2>
-                          <div class="wrapper-code">
-                            <mat-form-field appearance="fill">
-                                <input matInput maxLength="6">
-                              </mat-form-field>
-                            </div>
-                          <div class="wrapper-nav-buttons">
-                            <button mat-button matStepperPrevious class="btn btn-light" (click)='enviar=false;hideText=false'>Atrás</button>
-                            <button mat-button matStepperNext (click)="stateFlag = !stateFlag" class="btn btn-secundario">Configurar mi tienda</button>
-                          </div>
-                        </form>
-                      </mat-step>
-                      <mat-step class="step-three">
-                        <form class="form-step-three">
-                          <div class="wrapper-step-three">
-                            <a class="primario link-inicio" (click)='enviar=false;stepper.reset();stateFlag = !stateFlag;hideText=false'>Regresar al inicio</a>
-                              <h4 class="negro bold" style="margin-top:10px">Por último necesitamos conocer algunos datos de tu tienda</h4>
-                        <ng-template matStepLabel>Datos de la tienda</ng-template>
 
                         <mat-form-field appearance="fill">
-                            <mat-label>Nombre de la tienda</mat-label>
-                            <mat-icon matSuffix class="input-icon">store</mat-icon>
-                          <input type="text" matInput placeholder="Mi tienda">
-                          
+
+
+                          <mat-label>Correo electrónico</mat-label>
+                          <input ngModel matInput placeholder="micorreo@correo.com" formControlName="correo">
+                          <mat-icon matSuffix class="input-icon">mail</mat-icon>
+                          <mat-error class="badge badge-pill badge-danger animated fadeInUp" *ngIf="enviar">
+                            {{getError(formProspecto,'correo')}}</mat-error>
+                          <mat-icon class="check-icon animated fadeInUp" matSuffix
+                            *ngIf="formProspecto.controls.correo.valid">
+                            check_circle
+                          </mat-icon>
+                        </mat-form-field>
+                      </div>
+
+
+                      <div class="form-group">
+
+
+                        <mat-form-field appearance="fill">
+                          <mat-label>Número telefónico</mat-label>
+                          <input matInput placeholder="(+57)123.." formControlName="telefono">
+                          <mat-icon matSuffix class="input-icon">call</mat-icon>
+                          <mat-error class="badge badge-pill badge-danger animated fadeInUp" *ngIf="enviar ">
+                            {{getError(formProspecto,'telefono')}}</mat-error>
+                          <mat-icon matSuffix class="check-icon animated fadeInUp"
+                            *ngIf="formProspecto.controls.telefono.valid">
+                            check_circle
+                          </mat-icon>
+                        </mat-form-field>
+                      </div>
+
+                      <div class="wrapper-nav-buttons">
+                        <button mat-button class="btn btn-secundario" (click)='sendProspecto()'>Crear mi tienda</button>
+                      </div>
+                    </form>
+                  </mat-step>
+                  <mat-step [stepControl]="secondFormGroup">
+                    <form [formGroup]="secondFormGroup" class="form-step-two">
+                      <ng-template matStepLabel>Fill out your address</ng-template>
+                      <img alt="Paso 2, Crear una tienda en línea con Bixpro" class="img-header"
+                        src="../../assets/imagenes/store.svg">
+                      <p>Estás a un sólo paso de crear tu tienda!<br> Hemos enviado un <strong class="negro">Código de
+                          verificación a tu correo electrónico</strong></p>
+                      <h2 class="bold">Código</h2>
+                      <div class="wrapper-code">
+                        <mat-form-field appearance="fill">
+                          <input matInput maxLength="6">
+                        </mat-form-field>
+                      </div>
+                      <div class="wrapper-nav-buttons">
+                        <button mat-button matStepperPrevious class="btn btn-light"
+                          (click)='enviar=false;hideText=false'>Atrás</button>
+                        <button mat-button matStepperNext (click)="stateFlag = !stateFlag"
+                          class="btn btn-secundario">Configurar mi tienda</button>
+                      </div>
+                    </form>
+                  </mat-step>
+                  <mat-step class="step-three">
+                    <form [formGroup]="formConfigTienda" class="form-step-three">
+                      <div class="wrapper-step-three">
+                        <!-- <a class="primario link-inicio"
+                          (click)='enviar=false;stepper.reset();stateFlag = !stateFlag;hideText=false'>Regresar al
+                          inicio</a> -->
+                        <h4 class="negro bold" style="margin-top:10px">Por último necesitamos conocer algunos datos de
+                          tu tienda</h4>
+                        <ng-template matStepLabel>Datos de la tienda</ng-template>
+
+                        <mat-form-field appearance="fill" hintLabel="Max 12 caracteres">
+                          <mat-label>Nombre de la tienda</mat-label>
+                          <mat-icon matSuffix class="input-icon">store</mat-icon>
+                          <input type="text" matInput placeholder="Mi tienda" formControlName="nombre" maxlength="25" (keyup)="setUrl(false)">
+                          <mat-hint align="end">{{formConfigTienda.value?.nombre?.length || 0}}/25</mat-hint>
+                          <mat-error class="badge badge-pill badge-danger animated fadeInUp" *ngIf="enviar">
+                            {{getError(formConfigTienda,'nombre')}}</mat-error>
                         </mat-form-field>
 
-                        <mat-form-field appearance="fill" class="edit">
-                            <mat-label>Descripción de la tienda</mat-label>
-                          <textarea matInput placeholder="Mi tienda se vende..."></textarea>
+                         <mat-form-field  appearance="fill" hintLabel="Max 12 caracteres" width="50">
+                            <mat-label>Enlace de mi tienda</mat-label>
+                            <input #url type="text" (keyup)="setUrl(true,$event.target.value)" matInput placeholder="url" maxlength="25">
+                            <mat-hint align="end">{{formConfigTienda.value?.url?.length || 0}}/25</mat-hint>
+                            <mat-error class="badge badge-pill badge-danger animated fadeInUp" *ngIf="enviar">
+                              {{getError(formConfigTienda,'url')}}</mat-error>
+                              <span matPrefix>WWW.&nbsp;</span>
+                              <span matSuffix>.bixpro.co</span>
+                          </mat-form-field>
+                        
+
+                        <mat-form-field appearance="fill" class="edit" hintLabel="Max 255 caracteres">
+                          <mat-label>Descripción de la tienda</mat-label>
+                          <textarea matInput placeholder="Mi tienda se vende..." formControlName="descripcion"
+                            maxlength="255"></textarea>
                           <mat-icon matSuffix class="input-icon">edit</mat-icon>
+                          <mat-hint align="end">{{formConfigTienda.value?.descripcion?.length || 0}}/255</mat-hint>
+                          <mat-error class="badge badge-pill badge-danger animated fadeInUp" *ngIf="enviar">
+                            {{getError(formConfigTienda,'descripcion')}}</mat-error>
                         </mat-form-field>
 
                         <h4 class="negro regular">¿A qué sector pertenece tu tienda?</h4>
                         <div class="wrapper-cards">
-                          <button class="box-store">
-                              <img alt="Paso 3, Elige el sector de tu tienda en línea" src="../../assets/imagenes/card-icon.svg">
-                              <h4>Alimentos y/o consumibles</h4>
-                              <p>Supermercados, farmacias, alimentos y bebidas</p>
+                          <button class="box-store" (click)="plantilla = 'T1'">
+                            <img alt="Paso 3, Elige el sector de tu tienda en línea"
+                              src="../../assets/imagenes/card-icon.svg">
+                            <h4>Alimentos y/o consumibles</h4>
+                            <p>Supermercados, farmacias, alimentos y bebidas</p>
                           </button>
 
 
-                          <button class="box-store">
-                            <img alt="Paso 3, Elige el sector de tu tienda en línea" src="../../assets/imagenes/card-icon2.svg">
+                          <button class="box-store" (click)="plantilla = 'T2'">
+                            <img alt="Paso 3, Elige el sector de tu tienda en línea"
+                              src="../../assets/imagenes/card-icon2.svg">
                             <h4>Accesorios en general</h4>
                             <p>Mascotas, moda, belleza, tecnología, bienes raices</p>
-                        </button>
+                          </button>
 
 
-                        <button class="box-store">
-                            <img class="img-three" alt="Paso 3, Elige el sector de tu tienda en línea" src="../../assets/imagenes/otro-icon.svg">
+                          <button class="box-store" (click)="plantilla = 'T3'">
+                            <img class="img-three" alt="Paso 3, Elige el sector de tu tienda en línea"
+                              src="../../assets/imagenes/otro-icon.svg">
                             <h4>Otros sectores</h4>
                             <mat-form-field appearance="fill">
-                                <mat-label>¿ Cuál ?</mat-label>
-                                <mat-icon matSuffix class="input-icon">shopping_cart</mat-icon>
-                              <input type="text" matInput placeholder="">
+                              <mat-label>¿ Cuál ?</mat-label>
+                              <mat-icon matSuffix class="input-icon">shopping_cart</mat-icon>
+                              <input type="text" matInput placeholder="" [disabled]="plantilla != 'T3'"
+                                formControlName="sector">
+                              <mat-error class="badge badge-pill badge-danger animated fadeInUp" *ngIf="enviar">
+                                {{getError(formConfigTienda,'sector')}}</mat-error>
                             </mat-form-field>
-                        </button>
+                          </button>
 
 
                         </div>
-                     
+
 
                         <div class="wrapper-nav-buttons">
-                         <!-- <button mat-button matStepperPrevious (click)="stateFlag = !stateFlag" class="btn btn-light">Atrás</button>-->
-                          <button mat-button (click)="showLoading()" class="btn btn-secundario">Ir a mi tienda</button>
+                          <!-- <button mat-button matStepperPrevious (click)="stateFlag = !stateFlag" class="btn btn-light">Atrás</button>-->
+                          <button mat-button (click)="goToShop()" class="btn btn-secundario">Ir a mi tienda</button>
                         </div>
 
                       </div>
-                      </form>
-                      </mat-step>
-                    </mat-horizontal-stepper>
+                    </form>
+                  </mat-step>
+                </mat-horizontal-stepper>
 
               </ng-template>
             </ngb-tab>
@@ -161,177 +189,270 @@
               <ng-template ngbTabContent>
 
                 <div class="row" class="precios">
-               
-                    <div style="text-align:center">
-                    
-                          <owl-carousel-o [options]="customOptions">
-                          <ng-template carouselSlide> <div class="tarjeta">
-                              <div class="encabezado">
-                                <img alt="Planes Bixpro para tu tienda en línea" src="../../assets/imagenes/plan-descubre.svg">
-                                <h3 class="titulo">Plan Descubre</h3>
-                                <p class="precio">$0 /<span>mes</span></p>
 
-                                <p class="adicional">Servicios adicionales</p>
-                                <p class="dominio"><span>Dominio.com $119.000</span> </p>
+                  <div style="text-align:center">
 
-                              </div>
-                              <ul class="lista">
-                                <li><mat-icon>shopping_cart</mat-icon>Hasta 10 productos</li>
-                                <li><mat-icon>check</mat-icon>Carrito de pedidos</li>
-                                <li><mat-icon>beenhere</mat-icon>Certificado de seguridad</li>
-                                <li><mat-icon>check</mat-icon>Dominio tutienda.bixpro.co</li>
-                                <li><mat-icon>list</mat-icon>Administrador de pedidos</li>
-                                <li><mat-icon>list</mat-icon>Administrador de productos</li>
-                                <li><mat-icon>check</mat-icon>Amigable con dispositivos móviles</li>
-                                <li><mat-icon>check</mat-icon>10 pedidos al mes</li>
-                                <li class="no-border-b"><mat-icon>perm_identity</mat-icon>Gestiona hasta 1 usuario</li>
-                             
-        
-                              </ul>
-                            </div></ng-template>  
-                          <ng-template carouselSlide> <div class="tarjeta">
-                              <div class="encabezado">
-                                <img alt="Planes Bixpro para tu tienda en línea" src="../../assets/imagenes/plan-emprende.svg">
-                                <h3 class="titulo">Plan Emprende</h3>
-                                <p class="precio">$55.000 /<span>mes</span></p>
+                    <owl-carousel-o [options]="customOptions">
+                      <ng-template carouselSlide>
+                        <div class="tarjeta">
+                          <div class="encabezado">
+                            <img alt="Planes Bixpro para tu tienda en línea"
+                              src="../../assets/imagenes/plan-descubre.svg">
+                            <h3 class="titulo">Plan Descubre</h3>
+                            <p class="precio">$0 /<span>mes</span></p>
 
-                                <p class="adicional">Servicios adicionales</p>
-                                <p class="dominio"><span>Dominio.com $119.000</span> </p>
-                              </div>
-                              <ul class="lista">
-                                <li><mat-icon>shopping_cart</mat-icon>Hasta 50 productos</li>
-                                <li><mat-icon>check</mat-icon>Carrito de pedidos</li>
-                                <li><mat-icon>beenhere</mat-icon>Certificado de seguridad</li>
-                                <li><mat-icon>check</mat-icon>Configuración de dominio personalizado</li>
-                                <li><mat-icon>list</mat-icon>Administrador de pedidos</li>
-                                <li><mat-icon>list</mat-icon>Administrador de productos</li>
-                                <li><mat-icon>check</mat-icon>Amigable con dispositivos móviles</li>
-                                <li><mat-icon>check</mat-icon>50 pedidos al mes</li>
-                                <li class="no-border-b"><mat-icon>perm_identity</mat-icon>Gestiona hasta 2 usuarios</li>
-                              
-        
-                              </ul>
-                            </div></ng-template>  
-                          <ng-template carouselSlide> <div class="tarjeta">
-                              <div class="encabezado">
-                                <img alt="Planes Bixpro para tu tienda en línea" src="../../assets/imagenes/plan-avanza.svg">
-                                <h3 class="titulo">Plan Avanza</h3>
-                                <p class="precio">$80.000 / <span>mes</span></p>
+                            <p class="adicional">Servicios adicionales</p>
+                            <p class="dominio"><span>Dominio.com $119.000</span> </p>
 
-                                <p class="adicional">Servicios adicionales</p>
-                                <p class="dominio"><span>Dominio.com $119.000</span> </p>
-
-                              </div>
-                              <ul class="lista">
-                                  <li><mat-icon>shopping_cart</mat-icon>Hasta 100 productos</li>
-                                  <li><mat-icon>check</mat-icon>Carrito de compras</li>
-                                  <li><mat-icon>beenhere</mat-icon>Certificado de seguridad</li>
-                                  <li><mat-icon>check</mat-icon>Configuración de dominio personalizado</li>
-                                  <li><mat-icon>list</mat-icon>Administrador de pedidos</li>
-                                  <li><mat-icon>list</mat-icon>Administrador de productos</li>
-                                  <li><mat-icon>check</mat-icon>Amigable con dispositivos móviles</li>
-                                  <li><mat-icon>check</mat-icon>100 pedidos al mes</li>
-                                  <li><mat-icon>perm_identity</mat-icon>Gestiona hasta 4 usuarios</li>
-                                  <li class="no-border-b"><mat-icon>perm_identity</mat-icon>Pasarela de pagos (Epayco - Paypal)</li>
-                                
-        
-                              </ul>
-                            </div></ng-template> 
+                          </div>
+                          <ul class="lista">
+                            <li>
+                              <mat-icon>shopping_cart</mat-icon>Hasta 10 productos
+                            </li>
+                            <li>
+                              <mat-icon>check</mat-icon>Carrito de pedidos
+                            </li>
+                            <li>
+                              <mat-icon>beenhere</mat-icon>Certificado de seguridad
+                            </li>
+                            <li>
+                              <mat-icon>check</mat-icon>Dominio tutienda.bixpro.co
+                            </li>
+                            <li>
+                              <mat-icon>list</mat-icon>Administrador de pedidos
+                            </li>
+                            <li>
+                              <mat-icon>list</mat-icon>Administrador de productos
+                            </li>
+                            <li>
+                              <mat-icon>check</mat-icon>Amigable con dispositivos móviles
+                            </li>
+                            <li>
+                              <mat-icon>check</mat-icon>10 pedidos al mes
+                            </li>
+                            <li class="no-border-b">
+                              <mat-icon>perm_identity</mat-icon>Gestiona hasta 1 usuario
+                            </li>
 
 
+                          </ul>
+                        </div>
+                      </ng-template>
+                      <ng-template carouselSlide>
+                        <div class="tarjeta">
+                          <div class="encabezado">
+                            <img alt="Planes Bixpro para tu tienda en línea"
+                              src="../../assets/imagenes/plan-emprende.svg">
+                            <h3 class="titulo">Plan Emprende</h3>
+                            <p class="precio">$55.000 /<span>mes</span></p>
 
-                            <ng-template carouselSlide> <div class="tarjeta">
-                                <div class="encabezado">
-                                  <img alt="Planes Bixpro para tu tienda en línea" src="../../assets/imagenes/plan-premium.svg">
-                                  <h3 class="titulo">Plan Premium</h3>
-                                  <p class="precio">$120.000 / <span>mes</span></p>
+                            <p class="adicional">Servicios adicionales</p>
+                            <p class="dominio"><span>Dominio.com $119.000</span> </p>
+                          </div>
+                          <ul class="lista">
+                            <li>
+                              <mat-icon>shopping_cart</mat-icon>Hasta 50 productos
+                            </li>
+                            <li>
+                              <mat-icon>check</mat-icon>Carrito de pedidos
+                            </li>
+                            <li>
+                              <mat-icon>beenhere</mat-icon>Certificado de seguridad
+                            </li>
+                            <li>
+                              <mat-icon>check</mat-icon>Configuración de dominio personalizado
+                            </li>
+                            <li>
+                              <mat-icon>list</mat-icon>Administrador de pedidos
+                            </li>
+                            <li>
+                              <mat-icon>list</mat-icon>Administrador de productos
+                            </li>
+                            <li>
+                              <mat-icon>check</mat-icon>Amigable con dispositivos móviles
+                            </li>
+                            <li>
+                              <mat-icon>check</mat-icon>50 pedidos al mes
+                            </li>
+                            <li class="no-border-b">
+                              <mat-icon>perm_identity</mat-icon>Gestiona hasta 2 usuarios
+                            </li>
 
-                                  <p class="adicional">Servicios adicionales</p>
-                                  <p class="dominio"><span>Dominio.com $119.000</span> </p>
 
-                                </div>
-                                <ul class="lista">
-                                    <li><mat-icon>shopping_cart</mat-icon>Hasta 600 productos</li>
-                                    <li><mat-icon>check</mat-icon>Carrito de compras</li>
-                                    <li><mat-icon>beenhere</mat-icon>Certificado de seguridad</li>
-                                    <li><mat-icon>check</mat-icon>Configuración de dominio personalizado</li>
-                                    <li><mat-icon>list</mat-icon>Administrador de pedidos</li>
-                                    <li><mat-icon>list</mat-icon>Administrador de productos</li>
-                                    <li><mat-icon>check</mat-icon>Amigable con dispositivos móviles</li>
-                                    <li><mat-icon>check</mat-icon>600 pedidos al mes</li>
-                                    <li><mat-icon>perm_identity</mat-icon>Gestiona hasta 10 usuarios</li>
-                                    <li class="no-border-b"><mat-icon>perm_identity</mat-icon>Pasarela de pagos (Epayco - Paypal)</li>
-                                 
-          
-                                </ul>
-                              </div></ng-template> 
-                          
-                        </owl-carousel-o>
-                     
-                      </div>
+                          </ul>
+                        </div>
+                      </ng-template>
+                      <ng-template carouselSlide>
+                        <div class="tarjeta">
+                          <div class="encabezado">
+                            <img alt="Planes Bixpro para tu tienda en línea"
+                              src="../../assets/imagenes/plan-avanza.svg">
+                            <h3 class="titulo">Plan Avanza</h3>
+                            <p class="precio">$80.000 / <span>mes</span></p>
+
+                            <p class="adicional">Servicios adicionales</p>
+                            <p class="dominio"><span>Dominio.com $119.000</span> </p>
+
+                          </div>
+                          <ul class="lista">
+                            <li>
+                              <mat-icon>shopping_cart</mat-icon>Hasta 100 productos
+                            </li>
+                            <li>
+                              <mat-icon>check</mat-icon>Carrito de compras
+                            </li>
+                            <li>
+                              <mat-icon>beenhere</mat-icon>Certificado de seguridad
+                            </li>
+                            <li>
+                              <mat-icon>check</mat-icon>Configuración de dominio personalizado
+                            </li>
+                            <li>
+                              <mat-icon>list</mat-icon>Administrador de pedidos
+                            </li>
+                            <li>
+                              <mat-icon>list</mat-icon>Administrador de productos
+                            </li>
+                            <li>
+                              <mat-icon>check</mat-icon>Amigable con dispositivos móviles
+                            </li>
+                            <li>
+                              <mat-icon>check</mat-icon>100 pedidos al mes
+                            </li>
+                            <li>
+                              <mat-icon>perm_identity</mat-icon>Gestiona hasta 4 usuarios
+                            </li>
+                            <li class="no-border-b">
+                              <mat-icon>perm_identity</mat-icon>Pasarela de pagos (Epayco - Paypal)
+                            </li>
 
 
-               
+                          </ul>
+                        </div>
+                      </ng-template>
+
+
+
+                      <ng-template carouselSlide>
+                        <div class="tarjeta">
+                          <div class="encabezado">
+                            <img alt="Planes Bixpro para tu tienda en línea"
+                              src="../../assets/imagenes/plan-premium.svg">
+                            <h3 class="titulo">Plan Premium</h3>
+                            <p class="precio">$120.000 / <span>mes</span></p>
+
+                            <p class="adicional">Servicios adicionales</p>
+                            <p class="dominio"><span>Dominio.com $119.000</span> </p>
+
+                          </div>
+                          <ul class="lista">
+                            <li>
+                              <mat-icon>shopping_cart</mat-icon>Hasta 600 productos
+                            </li>
+                            <li>
+                              <mat-icon>check</mat-icon>Carrito de compras
+                            </li>
+                            <li>
+                              <mat-icon>beenhere</mat-icon>Certificado de seguridad
+                            </li>
+                            <li>
+                              <mat-icon>check</mat-icon>Configuración de dominio personalizado
+                            </li>
+                            <li>
+                              <mat-icon>list</mat-icon>Administrador de pedidos
+                            </li>
+                            <li>
+                              <mat-icon>list</mat-icon>Administrador de productos
+                            </li>
+                            <li>
+                              <mat-icon>check</mat-icon>Amigable con dispositivos móviles
+                            </li>
+                            <li>
+                              <mat-icon>check</mat-icon>600 pedidos al mes
+                            </li>
+                            <li>
+                              <mat-icon>perm_identity</mat-icon>Gestiona hasta 10 usuarios
+                            </li>
+                            <li class="no-border-b">
+                              <mat-icon>perm_identity</mat-icon>Pasarela de pagos (Epayco - Paypal)
+                            </li>
+
+
+                          </ul>
+                        </div>
+                      </ng-template>
+
+                    </owl-carousel-o>
+
+                  </div>
+
+
+
                 </div>
 
-            
+
               </ng-template>
             </ngb-tab>
-         
+
           </ngb-tabset>
 
         </div>
 
-        <p class="footer">Bixpro, un software hecho por <a href="https://www.madeincol.com" class="link" target="_blank">MadeInCol Software</a></p>
+        <p class="footer">Bixpro, un software hecho por <a href="https://www.madeincol.com" class="link"
+            target="_blank">MadeInCol Software</a></p>
 
-    </div>
+      </div>
 
-    <div class="col-lg-5 d-lg-block d-md-none d-sm-none d-none col-carousel" [ngClass]="{ 'd-none-col-carousel' : !stateFlag , 'd-block-col-carousel' : stateFlag }">
-      
+      <div class="col-lg-5 d-lg-block d-md-none d-sm-none d-none col-carousel"
+        [ngClass]="{ 'd-none-col-carousel' : !stateFlag , 'd-block-col-carousel' : stateFlag }">
+
 
         <owl-carousel-o class="carousel-dos" [options]="customdosOptions">
-          
-            <ng-template carouselSlide> 
-             <div class="bg-slide-1"></div>
 
-             <div class="caption">
-               <h2>Vende fácil y rápido en línea</h2>
-               <p>Con Bixpro,
-                  Elija cómo quiere
-                  comunicar sus
-                  productos y/o
-                  servicios a sus
-                  usuarios, te proporcionamos una plataforma para administrar tu tienda</p>
-             </div>
-            </ng-template> 
+          <ng-template carouselSlide>
+            <div class="bg-slide-1"></div>
 
-
-
-              <ng-template carouselSlide> 
-                  <div class="bg-slide-2"></div>
-
-                  <div class="caption">
-                    <img alt="Bixpro, vende en línea con un ecommerce" class="img-caption" src="../../assets/imagenes/slide-2.png">
-                    <h2>Venda con un sitio web</h2>
-                    <p>Haga presencia en línea a través de un sitio web que destaque sus productos y reciba pedidos, además cree ofertas y descuentos para sus clientes.</p>
-                  </div>
-              </ng-template> 
+            <div class="caption">
+              <h2>Vende fácil y rápido en línea</h2>
+              <p>Con Bixpro,
+                Elija cómo quiere
+                comunicar sus
+                productos y/o
+                servicios a sus
+                usuarios, te proporcionamos una plataforma para administrar tu tienda</p>
+            </div>
+          </ng-template>
 
 
-              <ng-template carouselSlide> 
-                  <div class="bg-slide-3"></div>
 
-                  <div class="caption">
-                    <img alt="Bixpro, cree campañas para su tienda en línea" class="img-caption" src="../../assets/imagenes/slide-3.png">
-                    <h2>Marketing</h2>
-                    <p>Cree campañas de marketing sobre sus poductos o servicios a través del envío masivo de información</p>
-                  </div>
-              </ng-template> 
-            
-          </owl-carousel-o>
+          <ng-template carouselSlide>
+            <div class="bg-slide-2"></div>
+
+            <div class="caption">
+              <img alt="Bixpro, vende en línea con un ecommerce" class="img-caption"
+                src="../../assets/imagenes/slide-2.png">
+              <h2>Venda con un sitio web</h2>
+              <p>Haga presencia en línea a través de un sitio web que destaque sus productos y reciba pedidos, además
+                cree ofertas y descuentos para sus clientes.</p>
+            </div>
+          </ng-template>
+
+
+          <ng-template carouselSlide>
+            <div class="bg-slide-3"></div>
+
+            <div class="caption">
+              <img alt="Bixpro, cree campañas para su tienda en línea" class="img-caption"
+                src="../../assets/imagenes/slide-3.png">
+              <h2>Marketing</h2>
+              <p>Cree campañas de marketing sobre sus poductos o servicios a través del envío masivo de información</p>
+            </div>
+          </ng-template>
+
+        </owl-carousel-o>
+      </div>
+
+
     </div>
-
-
   </div>
-</div>
 </section>

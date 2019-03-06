@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators, FormsModule} from '@angular/forms';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2'
+import { TiendaBixproService } from '../providers/tienda-bixpro.service'
+import { MatStepper } from '@angular/material/stepper';
 
 
 @Component({
@@ -9,28 +11,47 @@ import Swal from 'sweetalert2'
   styleUrls: ['./crear-tienda.component.scss']
 })
 export class CrearTiendaComponent implements OnInit {
-  firstFormGroup: FormGroup;
+  formProspecto: FormGroup;
   secondFormGroup: FormGroup;
+  formConfigTienda: FormGroup;
   stateFlag = true;
   hideText = false;
-  enviar= false;
+  enviar = false;
+  plantilla: any;
+  @ViewChild('stepper') stepper: MatStepper;
+  @ViewChild('url') url: ElementRef;
 
+  constructor(private _formBuilder: FormBuilder,
+    private TiendaBixproService: TiendaBixproService) {
 
-  constructor(private _formBuilder: FormBuilder) {
-  
   }
 
-   /* VALIDATION*/
+
+  /* VALIDATION*/
+
   ngOnInit() {
-    this.firstFormGroup = this._formBuilder.group({
-      correoCtrl: ['',Validators.compose([Validators.required,Validators.email])],
-      celularCtrl: ['',Validators.compose([Validators.required])]
+    this.formProspecto = this._formBuilder.group({
+      correo: ['', Validators.compose([Validators.required, Validators.email])],
+      telefono: ['', Validators.compose([Validators.required, Validators.pattern('^[0-9]+')])],
+      diaInscripcion: [new Date()],
+      estado: ['Iniciando']
     });
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ''
     });
+    this.initFormConfigTienda('', '', '','');
   }
-/* owl carousel columna derecha*/
+
+  initFormConfigTienda(nombre, descripcion, sector,url) {
+    this.formConfigTienda = this._formBuilder.group({
+      nombre: [nombre, Validators.compose([Validators.required, Validators.maxLength(25), Validators.minLength(4)])],
+      descripcion: [descripcion, Validators.compose([Validators.required, Validators.maxLength(255)])],
+      sector: [sector],
+      url : [url,Validators.compose([Validators.required,Validators.maxLength(25), Validators.minLength(4)])]
+    });
+  }
+
+  /* owl carousel columna derecha*/
   title = 'angularowlslider';
   customOptions: any = {
     loop: true,
@@ -59,7 +80,7 @@ export class CrearTiendaComponent implements OnInit {
     nav: false
   }
 
-/* owl carousel planes*/
+  /* owl carousel planes*/
   customdosOptions: any = {
     loop: true,
     mouseDrag: true,
@@ -87,36 +108,167 @@ export class CrearTiendaComponent implements OnInit {
   }
 
 
- /* VALIDATION - mensajes de error*/
+  /* VALIDATION - mensajes de error*/
 
-    getError(form: any, control) {
-      let errors = form.controls[control].errors;
-      if (!errors) return "";
-      let keysErrors = Object.keys(errors);
-      if (keysErrors.length == 0) return "";
-      
-      switch (keysErrors[0]) {
+  getError(form: any, control) {
+    let errors = form.controls[control].errors;
+    if (!errors) return "";
+    let keysErrors = Object.keys(errors);
+    if (keysErrors.length == 0) return "";
+
+    switch (keysErrors[0]) {
       case "required":
-      return "Necesitamos este campo para que puedas crear tu tienda :)";
-      
+        return "Necesitamos este campo para que puedas crear tu tienda :)";
+
       case "email":
-      return "Verifica que el formato de correo esté escrito correctamente";
-  
-      }
-      }
+        return "Verifica que el formato de correo esté escrito correctamente";
 
-      /*SWEEtALERT */
+      case "pattern":
+        return "Algún caracter es invalido";
 
-      showLoading() { 
-        Swal.fire (
-          {
-            html: 'Enviando datos <strong></strong> ...',
-            timer: 10000,
-            customClass: 'alert-onboarding'
-            
-          }
-        )
+      case "minlength":
+        return "La longitud minima de caracteres es de: " + errors.minlength["requiredLength"];
+
+      case "maxlength":
+        return "La longitud maxima de caracteres es de: " + errors.maxlength["requiredLength"];
+
+    }
+  }
+
+  // Enviar prospecto;
+  sendProspecto() {
+    this.enviar = true;
+    this.actionStepper("2pasos");
+    /* if (this.formProspecto.invalid) {
+     this.informarUsuario("Ops... ¡Algo esta mal!", "Faltan campos por llenar y/o estan invalidos", 'error');
+     return;
+   }
+
+    this.TiendaBixproService.sendPetition(this.formProspecto.value, 'prospectosBixpro').subscribe((response: any) => {
+     Swal.close();
+     this.informarUsuario(response.title, response.message, response.type);
+     switch (response.code) {
+       case -1:
+         console.log("Error -1");
+         console.log("No avanza");
+         break;
+       case 0:
+         console.log("Error 0");
+         
+         break;
+       case 1:
+         this.actionStepper("2pasos");
+         break;
+     }
+   }) */
+  }
+
+  informarUsuario(title, html, type) {
+    Swal.fire({
+      title: title,
+      type: type,
+      animation: false,
+      customClass: 'animated lightSpeedIn alert-onboarding',
+      html: html,
+    })
+  }
+
+  actionStepper(accion: string, index?: number) {
+    switch (accion) {
+      case "atras": this.stepper.previous(); break;
+      case "adelante": this.stepper.next(); break;
+      case "index": this.stepper.selectedIndex = index; break;
+      case "reset": this.stepper.reset(); break;
+      case "2pasos":
+        this.stepper.next();
+        this.stepper.next();
+        this.stateFlag = !this.stateFlag;
+        this.enviar = false;
+        this.hideText = true;
+        break;
+    }
+  }
+
+  setUrl(escribe,value?){
+    if(!escribe && !this["reemplazar"]){
+      this.formConfigTienda.controls.url.setValue(this.clearSpaces(this.formConfigTienda.value.nombre));
+    }
+    if(escribe){
+      this["reemplazar"] = true;
+      this.formConfigTienda.controls.url.setValue(this.clearSpaces(value));
+    }
+    this.url.nativeElement.value = this.formConfigTienda.value.url;
+  }
+
+  clearSpaces(value){
+    return value.replace(/ /g,'').toLowerCase();
+  }
+
+  // Configuracion de tienda
+
+  goToShop() {
+    this.enviar = true;
+    if (!this.plantilla) {
+      this.informarUsuario("¿No te falta algo?", "Escoge el sector al que pertenece tu tienda", "warning");
+      return;
+    }
     
-        Swal.showLoading()
+    if (this.plantilla == "T3") {
+      this.formConfigTienda.controls["sector"].setValidators([Validators.compose([Validators.required])]);
+      this.formConfigTienda.controls["sector"].updateValueAndValidity();
+    }else{
+      this.formConfigTienda.controls["sector"].clearValidators();
+      this.formConfigTienda.controls["sector"].updateValueAndValidity();
+    }
+
+    if (this.formConfigTienda.invalid) {
+      this.informarUsuario("¿No te falta algo?", "Revisa muy bien los campos antes de enviar la solicitud.", "warning");
+      return;
+    }
+
+    let configuracion = this.formConfigTienda.value;
+    configuracion.plantilla = this.plantilla;
+    if (configuracion.plantilla != "T3") {
+      delete configuracion.sector;
+    }
+
+    let swalWithBootstrapButtons = Swal.mixin({
+      confirmButtonClass: 'btn btn-secundario text-white',
+      cancelButtonClass: 'btn btn-danger',
+      buttonsStyling: false,
+    })
+
+    swalWithBootstrapButtons.fire({
+      title: `¿Es lo que quieres?`,
+      animation: false,
+      type: 'question',
+      showCloseButton: true,
+      html: `<div class="row">
+      <div class="col-12">
+        <strong>¡Estas a un paso! pero necesitamos que estes seguro de tu configuración, por eso te la mostramos a continuación:</strong>
+      </div>
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            www.${configuracion.url}.bixpro.co
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Tu descripción es:</h5>
+            <p class="card-text">${configuracion.descripcion}</p>
+          </div>
+        </div>
+      </div>
+    </div>`,
+      customClass: 'animated zoomInDown',
+      showCancelButton: true,
+      confirmButtonText: '¡Es lo que quiero!',
+      cancelButtonText: 'Deseo Revisar',
+    }).then((result) => {
+      if (result.value) {
+        console.log(configuracion);
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        console.log("dijo que no");
       }
+    })
+  }
 }
