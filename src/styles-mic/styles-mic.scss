@@ -129,7 +129,7 @@ input:-webkit-autofill:active  {
 .check-icon {color:$terciario!important;font-weight:900}
 .input-icon {color:#cecece!important}
 .edit .mat-form-field-suffix {top:-15px!important}
-.edit .mat-form-field-infix {padding:0rem}
+.edit .mat-form-field-infix {padding: 1rem 0rem;}
  /* ONBOARDING*/
 
 
@@ -264,6 +264,18 @@ input:-webkit-autofill:active  {
           .mat-horizontal-stepper-header-container {display:none}
           .mat-step-header:hover {background-color:transparent};
           .mat-step-label {display:none}
+          .mat-form-field-subscript-wrapper {
+            position:relative;
+            margin-top: .2rem;
+          }
+
+          .label-f {
+            width:100%;
+            margin-left:auto;
+            color:$negro;
+          }
+
+          .mat-hint {color: #a7abb7}
           .mat-step-header .mat-step-icon {
             background-color: white;
             color: #fff;
@@ -365,7 +377,10 @@ input:-webkit-autofill:active  {
           @include laptop-down {width:100%}
         }
 
- 
+        .dominio {color:$primario;font-weight:600}
+        .input-dominio .mat-form-field-appearance-fill .mat-form-field-infix {
+          padding: 0em 0 .75em 0!important;
+        }
   
         .link-inicio{ cursor: pointer;text-decoration: underline!important;font-size:95%}
         h4:first-child {margin-top:20px}
