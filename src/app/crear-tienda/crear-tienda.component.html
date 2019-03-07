@@ -130,11 +130,13 @@
                         </mat-form-field>
 
                         <h4 class="negro regular label-f">¿Tienes algún color principal para tu tienda?</h4>
-                        
-                        
+
+
                         <mat-form-field appearance="fill" width="50" class="input-dominio">
-                          <input matInput placeholder="color" type="color"  formControlName="color">
-                          
+                          <!-- <input matInput placeholder="color" type="color"  formControlName="color"> -->
+                          <input formControlName="color" [style.background]="color"
+                            [cpPresetColors]="['#fff', '#000', '#2889e9', '#e920e9', '#fff500', 'rgb(236,64,64)']"
+                            [(colorPicker)]="color" />
                         </mat-form-field>
 
                         <h4 class="negro regular">¿A qué sector pertenece tu tienda?</h4>

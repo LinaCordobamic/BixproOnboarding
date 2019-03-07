@@ -8,7 +8,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { CrearTiendaComponent } from './crear-tienda/crear-tienda.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+import { ColorPickerModule } from 'ngx-color-picker'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http'
     ReactiveFormsModule,
     SharedModule,
     CarouselModule,
-    HttpClientModule
+    HttpClientModule,
+    ColorPickerModule
 
 
   ],

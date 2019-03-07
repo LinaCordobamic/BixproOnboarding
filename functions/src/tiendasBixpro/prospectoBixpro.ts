@@ -46,9 +46,8 @@ auth.post("/", (request : any, response : any) => {
                     usuario.id = doc.id;
                     return usuario
                 });
-                
+            
                 console.log("Ya existe en base de datos: " + data.correo + " , " + data.telefono);
-
                 switch(usuarios[0].estado){
                     case "Iniciando":
                     response.json({code : 0 , title : "Advertencia", message: "Hemos detectado que ya has iniciado tu proceso, asi que seras redirigido donde has quedado" , type : "warning" , id : usuarios[0].id , estado : usuarios[0].estado });    
@@ -60,8 +59,6 @@ auth.post("/", (request : any, response : any) => {
                     response.json({code : 0 , title : "Advertencia", message: "Hemos detectado que ya has iniciado tu proceso, asi que seras redirigido donde has quedado" , type : "warning" , id : usuarios[0].id , estado : usuarios[0].estado });    
                     break;
                 }
-
-                
             }
          }).catch(err=>{
             console.log(err);

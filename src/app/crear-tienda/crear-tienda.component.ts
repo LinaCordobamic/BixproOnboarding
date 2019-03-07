@@ -19,6 +19,10 @@ export class CrearTiendaComponent implements OnInit {
   enviar = false;
   plantilla: any;
   idUsuario : any;
+  nuevo : boolean;
+  datosEnviados :any;
+
+
   @ViewChild('stepper') stepper: MatStepper;
   @ViewChild('url') url: ElementRef;
 
@@ -137,13 +141,19 @@ export class CrearTiendaComponent implements OnInit {
     }
   }
 
+
+
+  
   // Enviar prospecto;
   sendProspecto() {
     if (this.formProspecto.invalid) {
      this.informarUsuario("Ops... ¡Algo esta mal!", "Faltan campos por llenar y/o estan invalidos", 'error');
      return;
    }
+   this.actionStepper("2pasos");
 
+   
+   /* this.datosEnviados = this.formProspecto.value;
     this.TiendaBixproService.sendPetition(this.formProspecto.value, 'prospectosBixpro').subscribe((response: any) => {
      Swal.close();
      console.log(response);
@@ -155,6 +165,8 @@ export class CrearTiendaComponent implements OnInit {
          break;
        case 0:
          console.log("Error 0");
+         //localStorage.setItem("nuevo","1");
+         this.nuevo = false;
          this.idUsuario = response.id;
          switch(response.estado){
            case "Iniciando":
@@ -166,11 +178,13 @@ export class CrearTiendaComponent implements OnInit {
          }
          break;
        case 1:
+         //localStorage.setItem("nuevo","0");
+         this.nuevo = true;
          this.idUsuario = response.id;
          this.actionStepper("2pasos");
          break;
      }
-   })
+   }); */
   }
 
   informarUsuario(title, html, type) {
@@ -200,7 +214,6 @@ export class CrearTiendaComponent implements OnInit {
   }
 
   setUrl(escribe,value?){
-    
     if(!escribe && !this["reemplazar"]){
       this.formConfigTienda.controls.url.setValue(this.clearSpaces(this.formConfigTienda.value.nombre));
     }
