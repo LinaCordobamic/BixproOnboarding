@@ -91,10 +91,14 @@
                         <!-- <a class="primario link-inicio"
                           (click)='enviar=false;stepper.reset();stateFlag = !stateFlag;hideText=false'>Regresar al
                           inicio</a> -->
-                        <h4 class="negro bold" style="margin-top:10px">Por último necesitamos conocer algunos datos de
-                          tu tienda</h4>
+                        <h3 class="titulo secundario bold" style="margin:20px 0px">Por último necesitamos conocer algunos datos de
+                          tu tienda</h3>
                         <ng-template matStepLabel>Datos de la tienda</ng-template>
 
+
+                      <div class="inline-inputs">
+
+                    
                         <mat-form-field appearance="fill">
                           <mat-label>Nombre de la tienda</mat-label>
                           <mat-icon matSuffix class="input-icon">store</mat-icon>
@@ -106,7 +110,7 @@
                         </mat-form-field>
 
 
-                        <h4 class="negro regular label-f">Enlace de mi tienda</h4>
+                       
                         <mat-form-field appearance="fill" width="50" class="input-dominio">
 
                           <input #url type="text" (keyup)="setUrl(true,$event.target.value)" matInput placeholder="url"
@@ -118,7 +122,8 @@
                           <span matSuffix class="dominio">.bixpro.co</span>
                         </mat-form-field>
 
-
+                      </div>
+                       
                         <mat-form-field appearance="fill" class="edit">
                           <mat-label>Descripción de la tienda</mat-label>
                           <textarea matInput placeholder="Mi tienda se vende..." formControlName="descripcion"
@@ -129,16 +134,17 @@
                             {{getError(formConfigTienda,'descripcion')}}</mat-error>
                         </mat-form-field>
 
-                        <h4 class="negro regular label-f">¿Tienes algún color principal para tu tienda?</h4>
-                        
-                        
-                        <mat-form-field appearance="fill" width="50" class="input-dominio">
-                          <input matInput placeholder="color" type="color"  formControlName="color">
-                          
-                        </mat-form-field>
+                        <div class="input-color-wrapper">
+                          <h4 class="gris">¿Tienes algún color principal para tu tienda?</h4>
+                          <input class="input-color"  matInput placeholder="color" type="color" value="#ff7653"  formControlName="color">
+                        </div>
 
-                        <h4 class="negro regular">¿A qué sector pertenece tu tienda?</h4>
+                    
+
+
+                        <h4 class="gris regular" style="margin-top:20px">¿A qué sector pertenece tu tienda?</h4>
                         <div class="wrapper-cards">
+                          <!-- Agregar clase activa a las cajas: class="box-store active"-->
                           <button class="box-store" (click)="plantilla = 'T1'">
                             <img alt="Paso 3, Elige el sector de tu tienda en línea"
                               src="../../assets/imagenes/card-icon.svg">

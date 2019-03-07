@@ -139,12 +139,13 @@ export class CrearTiendaComponent implements OnInit {
 
   // Enviar prospecto;
   sendProspecto() {
+    this.actionStepper("2pasos");
     if (this.formProspecto.invalid) {
-     this.informarUsuario("Ops... ¡Algo esta mal!", "Faltan campos por llenar y/o estan invalidos", 'error');
+     this.informarUsuario("Ops... ¡Algo esta mal!", "Faltan campos por llenar y/o estan inválidos", 'error');
      return;
    }
 
-    this.TiendaBixproService.sendPetition(this.formProspecto.value, 'prospectosBixpro').subscribe((response: any) => {
+  /*  this.TiendaBixproService.sendPetition(this.formProspecto.value, 'prospectosBixpro').subscribe((response: any) => {
      Swal.close();
      console.log(response);
      this.informarUsuario(response.title, response.message, response.type);
@@ -170,7 +171,7 @@ export class CrearTiendaComponent implements OnInit {
          this.actionStepper("2pasos");
          break;
      }
-   })
+   })*/
   }
 
   informarUsuario(title, html, type) {

@@ -128,7 +128,7 @@ input:-webkit-autofill:active  {
 
 .check-icon {color:$terciario!important;font-weight:900}
 .input-icon {color:#cecece!important}
-.edit .mat-form-field-suffix {top:-15px!important}
+.edit .mat-form-field-suffix {top:-60px!important}
 .edit .mat-form-field-infix {padding: 1rem 0rem;}
  /* ONBOARDING*/
 
@@ -269,11 +269,7 @@ input:-webkit-autofill:active  {
             margin-top: .2rem;
           }
 
-          .label-f {
-            width:100%;
-            margin-left:auto;
-            color:$negro;
-          }
+    
 
           .mat-hint {color: #a7abb7}
           .mat-step-header .mat-step-icon {
@@ -335,8 +331,8 @@ input:-webkit-autofill:active  {
             @include laptop-down {width:100%}
           }
     
-         .mat-form-field-suffix {color: rgba(70, 70, 70, 0.2);}
-         .mat-form-field.mat-form-field-invalid .mat-form-field-label {color: $gris;}
+          .mat-form-field-suffix {color: rgba(70, 70, 70, 0.2);}
+          .mat-form-field.mat-form-field-invalid .mat-form-field-label {color: $gris!important;}
           .mat-form-field-appearance-legacy .mat-form-field-suffix .mat-icon {color:#76ffa7}
           .mat-form-field-appearance-legacy .mat-form-field-label {color: $gris}
           .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {color: $primario}
@@ -377,10 +373,45 @@ input:-webkit-autofill:active  {
           @include laptop-down {width:100%}
         }
 
+        .inline-inputs {
+          @include flexbox();
+          @include align-items(center);
+          width:90%;
+          margin:0 auto;
+          @include tablet-down {display:block}
+          @include laptop-down {width:100%}
+        }
+
+        .inline-inputs .mat-form-field {
+          flex:1
+        }
+
+        .inline-inputs .mat-form-field:first-child {
+          margin-right:10px
+        }
+
+        .input-color-wrapper {
+          label {display:block;color:$negro}
+        }
+
+        .input-color {
+          width: 70px;
+          height: 70px;
+        }
+
         .dominio {color:$primario;font-weight:600}
+        .input-dominio .mat-form-field-prefix span {color:$negro}
         .input-dominio .mat-form-field-appearance-fill .mat-form-field-infix {
           padding: 0em 0 .75em 0!important;
         }
+      
+        .mat-form-field.mat-form-field-invalid .mat-form-field-label,
+        .mat-form-field-invalid .mat-input-element {color:$gris!important}
+        .mat-form-field-appearance-fill .mat-form-field-infix {
+          padding: 0em 0 .75em 0;
+      }
+
+      .input-dominio .mat-form-field-flex {background: #f7f7f7;}
   
         .link-inicio{ cursor: pointer;text-decoration: underline!important;font-size:95%}
         h4:first-child {margin-top:20px}
@@ -429,6 +460,7 @@ input:-webkit-autofill:active  {
             }
 
             .mat-form-field {width:100%}
+       
 
            
           }
@@ -445,7 +477,7 @@ input:-webkit-autofill:active  {
         }
          .mat-form-field{display:block;@include desktop-down {width:90%;margin:0 auto};@include laptop-down {width:100%}}
          .mat-form-field-wrapper{padding-bottom: 20px;}
-         textarea {resize: none;overflow-y:hidden}
+         textarea {resize: none;overflow-y:hidden;padding: 10px 0px;margin: 10px 0px;}
          .select .mat-form-field-wrapper {@include desktop-down{width:90%;margin:0 auto};;@include laptop-down {width:100%}}
       
        }
@@ -517,3 +549,19 @@ input:-webkit-autofill:active  {
        }
      
     }
+
+
+
+    /* SWAL */
+    .swal2-popup .swal2-styled.swal2-confirm {
+      background-color: $secundario!important;
+  }
+
+  .swal2-popup .swal2-styled:focus {box-shadow:none!important}
+
+  .swal2-icon.swal2-warning {
+    border-color: $terciario!important;
+    color: $terciario!important;
+  }
+
+  .swal2-icon-text {color:$terciario!important}
