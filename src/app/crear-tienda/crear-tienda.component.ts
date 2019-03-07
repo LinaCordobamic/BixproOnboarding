@@ -18,6 +18,7 @@ export class CrearTiendaComponent implements OnInit {
   hideText = false;
   enviar = false;
   plantilla: any;
+  idUsuario : any;
   @ViewChild('stepper') stepper: MatStepper;
   @ViewChild('url') url: ElementRef;
 
@@ -46,8 +47,9 @@ export class CrearTiendaComponent implements OnInit {
     this.formConfigTienda = this._formBuilder.group({
       nombre: [nombre, Validators.compose([Validators.required, Validators.maxLength(25), Validators.minLength(4)])],
       descripcion: [descripcion, Validators.compose([Validators.required, Validators.maxLength(255)])],
+      url : [url,Validators.compose([Validators.required,Validators.maxLength(25), Validators.minLength(4)])],
+      color : [''],
       sector: [sector],
-      url : [url,Validators.compose([Validators.required,Validators.maxLength(25), Validators.minLength(4)])]
     });
   }
 
@@ -137,15 +139,14 @@ export class CrearTiendaComponent implements OnInit {
 
   // Enviar prospecto;
   sendProspecto() {
-    this.enviar = true;
-    this.actionStepper("2pasos");
-    /* if (this.formProspecto.invalid) {
+    if (this.formProspecto.invalid) {
      this.informarUsuario("Ops... ¡Algo esta mal!", "Faltan campos por llenar y/o estan invalidos", 'error');
      return;
    }
 
     this.TiendaBixproService.sendPetition(this.formProspecto.value, 'prospectosBixpro').subscribe((response: any) => {
      Swal.close();
+     console.log(response);
      this.informarUsuario(response.title, response.message, response.type);
      switch (response.code) {
        case -1:
@@ -154,13 +155,22 @@ export class CrearTiendaComponent implements OnInit {
          break;
        case 0:
          console.log("Error 0");
-         
+         this.idUsuario = response.id;
+         switch(response.estado){
+           case "Iniciando":
+           this.actionStepper("2pasos");
+           break;
+           case "Finalizado":
+           console.log("para finalizado");
+           break;
+         }
          break;
        case 1:
+         this.idUsuario = response.id;
          this.actionStepper("2pasos");
          break;
      }
-   }) */
+   })
   }
 
   informarUsuario(title, html, type) {
@@ -190,6 +200,7 @@ export class CrearTiendaComponent implements OnInit {
   }
 
   setUrl(escribe,value?){
+    
     if(!escribe && !this["reemplazar"]){
       this.formConfigTienda.controls.url.setValue(this.clearSpaces(this.formConfigTienda.value.nombre));
     }
@@ -247,7 +258,7 @@ export class CrearTiendaComponent implements OnInit {
       <div class="col-12">
         <strong>¡Estas a un paso! pero necesitamos que estes seguro de tu configuración, por eso te la mostramos a continuación:</strong>
       </div>
-      <div class="col-12">
+      <div class="col-12 mt-17">
         <div class="card">
           <div class="card-header">
             www.${configuracion.url}.bixpro.co
@@ -265,10 +276,29 @@ export class CrearTiendaComponent implements OnInit {
       cancelButtonText: 'Deseo Revisar',
     }).then((result) => {
       if (result.value) {
-        console.log(configuracion);
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        console.log("dijo que no");
+        this.sendPeticionTienda(configuracion);
       }
     })
   }
+
+  sendPeticionTienda(confTienda){
+    this.TiendaBixproService.sendPetition(confTienda, 'crearTienda').subscribe((response: any) => {
+      Swal.close();
+      this.informarUsuario(response.title, response.message, response.type);
+      switch (response.code) {
+        case -1:
+          console.log("Error -1");
+          console.log("No avanza");
+          break;
+        case 0:
+          console.log("Error 0");
+          
+          break;
+        case 1:
+          this.actionStepper("2pasos");
+          break;
+      }
+    })
+  }
+
 }
