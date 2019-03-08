@@ -85,7 +85,7 @@
                       <div class="form-group">
                         <mat-form-field appearance="fill">
                           <mat-label>Número telefónico</mat-label>
-                          <input matInput placeholder="(+57)123.." formControlName="telefono">
+                          <input type="number" matInput placeholder="(+57)123.." formControlName="telefono">
                           <mat-icon matSuffix class="input-icon">call</mat-icon>
                           <mat-error class="badge badge-pill badge-danger animated fadeInUp" *ngIf="enviar ">
                             {{getError(formProspecto,'telefono')}}</mat-error>
@@ -128,8 +128,7 @@
                         <!-- <a class="primario link-inicio"
                           (click)='enviar=false;stepper.reset();stateFlag = !stateFlag;hideText=false'>Regresar al
                           inicio</a> -->
-                        <h3 class="titulo secundario bold" style="margin:20px 0px">Por último necesitamos conocer
-                          algunos datos de
+                        <h3 class="titulo negro bold" style="margin:20px 0px">Por último necesitamos conocer algunos datos de
                           tu tienda</h3>
                         <ng-template matStepLabel>Datos de la tienda</ng-template>
 
@@ -147,18 +146,23 @@
                               {{getError(formConfigTienda,'nombre')}}</mat-error>
                           </mat-form-field>
 
+                       
+                        <div class="input-group input-dominio">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text url">www.</span>
+                              </div>
+                            <input #url type="text" (keyup)="setUrl(true,$event.target.value)" placeholder="url" maxlength="25">
+                            <div class="input-group-append">
+                              <span class="input-group-text bixpro" id="basic-addon2">.bixpro.co</span>
+                            </div>
 
-
-                          <mat-form-field appearance="fill" width="50" class="input-dominio">
-
-                            <input #url type="text" (keyup)="setUrl(true,$event.target.value)" matInput
-                              placeholder="url" maxlength="25">
-                            <mat-hint align="end">{{formConfigTienda.value?.url?.length || 0}}/25</mat-hint>
-                            <mat-error class="badge badge-pill badge-danger animated fadeInUp" *ngIf="enviar">
-                              {{getError(formConfigTienda,'url')}}</mat-error>
-                            <span matPrefix>www.&nbsp;</span>
-                            <span matSuffix class="dominio">.bixpro.co</span>
-                          </mat-form-field>
+                            <div class="wrapper-hints">
+                                <span class="mat-hint">{{formConfigTienda.value?.url?.length || 0}}/25</span>
+                                <span class="badge-error animated fadeInUp" *ngIf="enviar">
+                                    {{getError(formConfigTienda,'url')}}</span>
+                            </div>
+                            
+                          </div>
 
                         </div>
 
@@ -173,27 +177,39 @@
                         </mat-form-field>
 
 
-                        <div class="inline-inputs">
+                        <h4 class="negro regular">Elige los colores para tu tienda</h4>
+                       
                           <div class="input-color-wrapper">
-                            <h4 class="gris">¿Tienes algún color principal para tu tienda?</h4>
-                            <!-- <input class="input-color"  matInput placeholder="color" type="color" value="#ff7653"  formControlName="color"> -->
-                            <input class="input-color" [style.background]="colorP" [cpPresetLabel]="preset"
-                              [cpPresetColors]="['#fff', '#000', '#2889e9', '#e920e9', '#fff500', 'rgb(236,64,64)']"
-                              [(colorPicker)]="colorP" />
-                          </div>
-
-                          <div class="input-color-wrapper">
-                            <h4 class="gris">¿Tienes algún color secundario para tu tienda?</h4>
-
-                            <input class="input-color" [style.background]="colorS" [cpPresetLabel]="preset"
-                              [cpPresetColors]="['#fff', '#000', '#2889e9', '#e920e9', '#fff500', 'rgb(236,64,64)']"
-                              [(colorPicker)]="colorS" />
-                          </div>
-                        </div>
+                           
+                            <div class="input-text primario">
+                              <div class="input-color" [style.background]="colorP"
+                              [cpPresetLabel]="preset"
+                              [cpPresetColors]="['#1abc9c', '#2ecc71', '#3498db', '#9b59b6', '#34495e', '#16a085', '#27ae60', '#2980b9', '#8e44ad', '#2c3e50',
+                              '#f1c40f', '#e67e22', '#e74c3c', '#ecf0f1', '#95a5a6', '#f39c12', '#d35400', '#c0392b', '#bdc3c7', '#7f8c8d']"
+                              [(colorPicker)]="colorP"></div>
+                              <p>Color principal</p>
+                            </div>
+                           
+                      
+                 
 
 
+                            <div class="input-text secundario">
+                                <div class="input-color" [style.background]="colorS"
+                                [cpPresetLabel]="preset"
+                                [cpPresetColors]="['#1abc9c', '#2ecc71', '#3498db', '#9b59b6', '#34495e', '#16a085', '#27ae60', '#2980b9', '#8e44ad', '#2c3e50',
+                                '#f1c40f', '#e67e22', '#e74c3c', '#ecf0f1', '#95a5a6', '#f39c12', '#d35400', '#c0392b', '#bdc3c7', '#7f8c8d']"
+                                [(colorPicker)]="colorS"></div>
+                                <p>Color secundario</p>
+                              </div>
+                            
+                          
+                            </div>
+                       
+                       
 
-                        <h4 class="gris regular" style="margin-top:20px">¿A qué sector pertenece tu tienda?</h4>
+                        
+                        <h4 class="negro regular" style="margin-top:20px">¿A qué sector pertenece tu tienda?</h4>
                         <div class="wrapper-cards">
                           <!-- Agregar clase activa a las cajas: class="box-store active"-->
                           <button class="box-store" (click)="plantilla = 'T1'" [class.active]="plantilla == 'T1'">

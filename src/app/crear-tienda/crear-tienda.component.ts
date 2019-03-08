@@ -22,7 +22,7 @@ export class CrearTiendaComponent implements OnInit {
   nuevo: boolean;
   datosEnviados: any;
   colorP = "#ff7653";
-  colorS = "#3264ef";
+  colorS = "#fffaf5";
   preset = "Colores Recomendados"
   configurando = false;
   estado = "";
@@ -153,7 +153,7 @@ export class CrearTiendaComponent implements OnInit {
   // Enviar prospecto;
   sendProspecto() {
     if (this.formProspecto.invalid) {
-      this.informarUsuario("Ops... ¡Algo esta mal!", "Faltan campos por llenar y/o estan inválidos", 'error');
+      this.informarUsuario("Ops... ¡Algo esta mal!", "Faltan campos por llenar y/o están inválidos", 'error');
       return;
     }
     this.actionStepper("2pasos");
