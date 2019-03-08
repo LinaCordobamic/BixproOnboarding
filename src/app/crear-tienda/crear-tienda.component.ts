@@ -22,7 +22,7 @@ export class CrearTiendaComponent implements OnInit {
   nuevo: boolean;
   datosEnviados: any;
   colorP = "#ff7653";
-  colorS = "#3264ef";
+  colorS = "#fffaf5";
   preset = "Colores Recomendados"
 
   @ViewChild('stepper') stepper: MatStepper;
@@ -150,7 +150,7 @@ export class CrearTiendaComponent implements OnInit {
   // Enviar prospecto;
   sendProspecto() {
     if (this.formProspecto.invalid) {
-      this.informarUsuario("Ops... ¡Algo esta mal!", "Faltan campos por llenar y/o estan inválidos", 'error');
+      this.informarUsuario("Ops... ¡Algo esta mal!", "Faltan campos por llenar y/o están inválidos", 'error');
       return;
     }
     this.actionStepper("2pasos");
@@ -275,27 +275,27 @@ export class CrearTiendaComponent implements OnInit {
 
 
     swalWithBootstrapButtons.fire({
-      title: `¿Es lo que quieres?`,
+      title: `Confirma la información`,
       animation: false,
       type: 'question',
       showCloseButton: true,
       html: `<div class="row">
       <div class="col-12">
-        <strong>¡Estas a un paso! pero necesitamos que estes seguro de tu configuración, por eso te la mostramos a continuación:</strong>
+        <p>¡Estas a un paso! pero necesitamos que estes seguro de tu configuración, por eso te la mostramos a continuación:</p>
       </div>
-      <div class="col-12 mt-17">
-        <div class="card">
-          <div class="card-header">
-            www.${configuracion.url}.bixpro.co
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">Tu descripción es:</h5>
-            <p class="card-text">${configuracion.descripcion}</p>
-          </div>
-        </div>
+      <div class="col-12 mt-17">             
+      <h4>Url de la tienda</h4>                 
+      <div class="field-info">
+          <p class="card-text">www.${configuracion.url}.bixpro.co</p>
       </div>
+    <h4>Descripción de la tienda</h4>
+    <div class="field-info">
+        <p class="card-text">${configuracion.descripcion}</p>
+      </div>
+      </div>
+      
     </div>`,
-      customClass: 'animated zoomInDown',
+      customClass: 'animated zoomInDown sweet-confirmacion',
       showCancelButton: true,
       confirmButtonText: '¡Es lo que quiero!',
       cancelButtonText: 'Deseo Revisar',

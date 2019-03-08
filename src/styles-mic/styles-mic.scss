@@ -36,9 +36,11 @@
       
     $primario: #ff7653;
     $secundario: #3264ef;
+    $secundario-claro: #6c93ff;
     $terciario:     #25da6f;
     $negro: #313346;
     $gris:  #6b6f8e;
+    $error: #ef3276 ;
 
 
  
@@ -102,7 +104,7 @@ input:-webkit-autofill:active  {
     font-size: 95%;
     background:none;
     text-align: left;
-    color: $primario;
+    color: $error;
     background: white!important;
     padding: 5px 0px;
 }
@@ -138,6 +140,7 @@ input:-webkit-autofill:active  {
 
     .onBoarding {
         position: relative;
+        background: #fcfdff;
         @include tablet-down {height:auto;padding:2rem 0rem}
         .row {align-items: center;height:100vh}
         .col-form {
@@ -294,9 +297,13 @@ input:-webkit-autofill:active  {
           }
           .btn-secundario {@include smartphone-down {width:100%}}
           input.mat-input-element {color:$negro!important}
-          .mat-form-field-flex {border-bottom: 1px solid #dadada;border-left: 3px solid $secundario;@include transition-slow}
-          .mat-focused .mat-form-field-flex {border-bottom:1px solid#dadada;border-left: 3px solid $primario}
+          .mat-form-field-flex {border:none;box-shadow: 0 0 0 1px #c4cdd5;@include transition-slow}
+          .mat-focused .mat-form-field-flex {box-shadow: 0 0 0 2px $secundario-claro}
+          .mat-focused .mat-form-field-label-wrapper {top: -1em;}
+          .mat-form-field .mat-form-field-label-wrapper {top:-1.1rem}
+          
 
+       
       
        }/* FIN WRAPPER*/
        .mat-form-field.mat-focused .mat-form-field-label {color:$gris}
@@ -310,10 +317,12 @@ input:-webkit-autofill:active  {
          }
        }
        .mat-form-field-wrapper {padding-bottom: 0px;}
-       .mat-form-field-appearance-fill .mat-form-field-flex {border:1px solid #dadada;background:white;}
-       .mat-focused .mat-form-field-flex {border:1px solid #dadada}
+       .mat-form-field-appearance-fill .mat-form-field-flex {border:none;box-shadow: 0 0 0 1px #c4cdd5;background:white;}
+       .mat-focused .mat-form-field-flex {border:none;box-shadow: 0 0 0 1px #c4cdd5;}
        .form-step-one {
          background:white;
+         padding: 25px 35px;
+         @include desktop-down {padding: 25px 30px;}
          .aviso {font-size:80%;color:$gris;margin-bottom:0px;margin-top:10px}
           .form-group {  position: relative;}
           .mat-form-field-infix {color:$primario}
@@ -332,7 +341,7 @@ input:-webkit-autofill:active  {
           }
     
           .mat-form-field-suffix {color: rgba(70, 70, 70, 0.2);}
-          .mat-form-field.mat-form-field-invalid .mat-form-field-label {color: $gris!important;}
+          .mat-form-field.mat-form-field-invalid .mat-form-field-label {color: $error!important;}
           .mat-form-field-appearance-legacy .mat-form-field-suffix .mat-icon {color:#76ffa7}
           .mat-form-field-appearance-legacy .mat-form-field-label {color: $gris}
           .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {color: $primario}
@@ -376,10 +385,11 @@ input:-webkit-autofill:active  {
         .inline-inputs {
           @include flexbox();
           @include align-items(center);
-          width:90%;
+          width:100%;
           margin:0 auto;
+          @include desktop-down {display: block;}
           @include tablet-down {display:block}
-          @include laptop-down {width:100%}
+          
         }
 
         .inline-inputs .mat-form-field {
@@ -391,27 +401,89 @@ input:-webkit-autofill:active  {
         }
 
         .input-color-wrapper {
+          @include flexbox;
+          @include justify-content(center);
           label {display:block;color:$negro}
         }
 
         .input-color {
-          width: 70px;
-          height: 70px;
+          width: 80px;
+          height: 80px;
+          cursor: pointer;
+          border-radius: 50%;
+          margin: 10px;
+          padding: 10px;
+          border: 3px solid #ffffff;
+          box-shadow: 0px 0px 12px rgba(131, 140, 199, 0.2);
+          &:focus {outline:none}
         }
+        .input-text.primario {margin-right:30px}
+        .input-text p {font-size:80%}
+
+
 
         .dominio {color:$primario;font-weight:600}
-        .input-dominio .mat-form-field-prefix span {color:$negro}
-        .input-dominio .mat-form-field-appearance-fill .mat-form-field-infix {
-          padding: 0em 0 .75em 0!important;
+        .input-dominio  {
+          flex: 1;
+          height: 66px;
+          position: relative;
+          top: -19px;
+          margin-bottom:0px;
+          @include laptop-down {
+            margin: 20px 0px;
+          }
+          @media (max-width:375px) {
+            margin: 10px 0px;
+            display: block;
+            height: auto;
+            .input-group-prepend, .input-group-append {
+              width: 100%;
+              .input-group-text {width:100%;border-radius:0px}
+            }
+
+            .input-group-prepend .input-group-text {border-bottom:none}
+            .input-group-append .input-group-text {border-top:none}
+          }
+
+        
+          .mat-hint {font-size:75%}
+          .wrapper-hints {    
+            display: block;
+            position: relative;
+            top: -5px;
+            width:100%;
+            text-align: right;
+            span {width:100%;text-align: right}
+            .badge-error {background:none;color:$error;font-size:75%}
+          }
+          input {
+            height: 66px;
+            font-size:1.2rem;
+            padding: 0px 10px;
+            flex: 1;
+            border:1px solid #c4cdd5;
+            span {font-size:1.2rem}
+            &:focus{box-shadow:none;outline:none;border:1px solid #c4cdd5};
+            @include smartphone {
+              width: 100%;
+            }
+          }
         }
-      
+
+        .input-group-text.bixpro {
+          background:$primario;
+          color:white;
+          border-color:$primario;
+          border-radius: 0px 5px 5px 0px;
+        }
+  
         .mat-form-field.mat-form-field-invalid .mat-form-field-label,
-        .mat-form-field-invalid .mat-input-element {color:$gris!important}
+        .mat-form-field-invalid .mat-input-element {color:$error!important}
         .mat-form-field-appearance-fill .mat-form-field-infix {
           padding: 0em 0 .75em 0;
       }
 
-      .input-dominio .mat-form-field-flex {background: #f7f7f7;}
+  
   
         .link-inicio{ cursor: pointer;text-decoration: underline!important;font-size:95%}
         h4:first-child {margin-top:20px}
@@ -420,14 +492,14 @@ input:-webkit-autofill:active  {
           margin:.5rem 2rem 2rem 2rem;
           @include flexbox;
           @include align-items(center);
-          @include laptop-down {display:block;margin:0rem}
+          @include laptop-down {display:block;margin:0rem 0rem 2rem 0rem}
           .box-store {
             @include transition-slow;
             background: #ffffff;
             box-shadow: 1px 2px 12px rgba(131, 130, 130, 0.05);
             display: inline-block;
             padding: 20px 15px 20px 15px;
-            border: 2px dotted #dadada;
+            border: 1px solid #dadada;
             border-radius:5px;
             margin: 10px;
             height:280px;
@@ -443,7 +515,8 @@ input:-webkit-autofill:active  {
             cursor: pointer;
             &.active, &:focus, &:hover {
               background: #fffefa;
-              border: 2px dotted $primario;
+              border: 2px solid $secundario-claro;
+              transform: scale(1.05, 1.05);
             }
 
             h4 {font-size:95%;margin-top:2rem;font-weight:bold}
@@ -473,7 +546,7 @@ input:-webkit-autofill:active  {
           height:100%;
           margin:0px;
           border:2px dotted #efefef;
-          @include laptop-down {border:none;padding:0px}
+          @include laptop-down { padding: 20px 30px}
         }
          .mat-form-field{display:block;@include desktop-down {width:90%;margin:0 auto};@include laptop-down {width:100%}}
          .mat-form-field-wrapper{padding-bottom: 20px;}
@@ -497,11 +570,11 @@ input:-webkit-autofill:active  {
           text-align: left;
           margin:8px;
           background: white;
+          box-shadow: 0px 0px 12px #d6d9e4;
           @include smartphone-down {
             display:block;
             border-radius: 0px;
             padding: 25px 20px 10px 20px;
-            box-shadow:none;
             text-align: center;
           }
          }
@@ -554,7 +627,7 @@ input:-webkit-autofill:active  {
 
     /* SWAL */
     .swal2-popup .swal2-styled.swal2-confirm {
-      background-color: $secundario!important;
+      background-color: $negro!important;
   }
 
   .swal2-popup .swal2-styled:focus {box-shadow:none!important}
@@ -565,3 +638,43 @@ input:-webkit-autofill:active  {
   }
 
   .swal2-icon-text {color:$terciario!important}
+  .swal2-popup .swal2-title {color:$negro!important}
+  .swal2-icon {display:none!important}
+  .swal2-popup {padding:2rem!important}
+
+  .sweet-confirmacion .swal2-content .row .col-12 p {
+    margin: 20px 0px !important;
+    font-size: 95%;
+  }
+  .sweet-confirmacion .swal2-content h4 {font-size:115%!important;color:$secundario!important}
+  .sweet-confirmacion .swal2-content .field-info {
+    background: #f3f3f3;
+    padding: 2px;
+    margin-bottom: 15px;
+  }
+
+  .sweet-confirmacion .swal2-confirm {padding: 15px 30px !important;margin-right:10px!important;background:$primario!important}
+  .sweet-confirmacion .swal2-cancel {
+    color: #6c757d!important;
+    background-color: #edf0f3!important;
+    border-color: #a8bbce!important;
+    padding: 15px 30px !important;
+  }
+  .sweet-confirmacion .swal2-confirm:focus,
+  .sweet-confirmacion .swal2-cancel:focus {box-shadow:none!important}
+
+  /* COLOR PICKER*/
+  .color-picker {
+    padding: 20px;
+    box-shadow: 0px 0px 12px #e8e8e8;
+    border-radius: 10px;
+    border:none!important
+  }
+
+  .color-picker .arrow.arrow-right {display:none!important}
+  .color-picker .selected-color,
+  .color-picker .preset-area .preset-color {border:none!important}
+  .color-picker .preset-area .preset-color {box-shadow: 2px 0px 12px #e0e0e0;}
+  .color-picker .hex-text .box input {border:1px solid #c4cdd5}
+  .color-picker .hex-text .box input:focus {outline:none!important;background:#fafafa!important}
+  
