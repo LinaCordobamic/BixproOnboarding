@@ -1,3 +1,54 @@
+
+
+.change-bg-color {
+    -webkit-animation-duration: 20s;
+    animation-duration: 20s;
+-webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+-webkit-animation-name: animation-colors;
+    animation-name: animation-colors;
+-webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+}
+
+
+@-webkit-keyframes animation-colors {
+    0% {
+      background-color: #f55683;
+    }
+    25% {
+      background-color: #6d5bf5;
+    }
+    50% {
+      background-color: #2a84ff;
+    }
+    75% {
+      background-color: #ffe32a;
+    }
+    100% {
+      background-color: #f55683;
+    }
+  }
+  
+@keyframes animation-colors {
+    0% {
+      background-color: #f55683;
+    }
+    25% {
+      background-color: #6d5bf5;
+    }
+    50% {
+      background-color: #2a84ff;
+    }
+    75% {
+      background-color: #ffe32a;
+    }
+    100% {
+      background-color: #f55683;
+    }
+  }
+  
+
 .wrapper-loading {
     position: fixed;
     display: flex;
@@ -5,8 +56,6 @@
     align-items: center;
     justify-content: center;
     height: 100%;
-    background: white;
-    background: linear-gradient(1800deg, #ff623a, #ff886a);
     z-index: 9;
     width: 100%;
     overflow: hidden!important;

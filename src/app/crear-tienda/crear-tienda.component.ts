@@ -275,8 +275,8 @@ export class CrearTiendaComponent implements OnInit {
     console.log(configuracion);
     
     let request = new XMLHttpRequest();
-    request.open('GET', "www."+configuracion.url+".bixpro.co", true);
-    //request.open('GET', "https://madeincol.com/", true);
+   request.open('GET', "www."+configuracion.url+".bixpro.co", true);
+   // request.open('GET', "https://madeincol.com/", true);
     request.send();
     let cont = 0;
     request.onreadystatechange = ()=>{
@@ -284,27 +284,27 @@ export class CrearTiendaComponent implements OnInit {
       if(request.status === 404){
         if(cont == 1){
           swalWithBootstrapButtons.fire({
-            title: `¿Es lo que quieres?`,
+            title: `Confirmar datos`,
             animation: false,
             type: 'question',
             showCloseButton: true,
             html: `<div class="row">
             <div class="col-12">
-              <strong>¡Estas a un paso! pero necesitamos que estes seguro de tu configuración, por eso te la mostramos a continuación:</strong>
+              <p>¡Estas a un paso! pero necesitamos que estes seguro de tu configuración, por eso te la mostramos a continuación:</p>
             </div>
-            <div class="col-12 mt-17">
-              <div class="card">
-                <div class="card-header">
-                  www.${configuracion.url}.bixpro.co
-                </div>
-                <div class="card-body">
-                  <h5 class="card-title">Tu descripción es:</h5>
-                  <p class="card-text">${configuracion.descripcion}</p>
-                </div>
-              </div>
+            <div class="col-12 mt-17">             
+            <h4>Url de la tienda</h4>                 
+            <div class="field-info">
+                <p class="card-text">www.${configuracion.url}.bixpro.co</p>
             </div>
+          <h4>Descripción de la tienda</h4>
+          <div class="field-info">
+              <p class="card-text">${configuracion.descripcion}</p>
+            </div>
+            </div>
+            
           </div>`,
-            customClass: 'animated zoomInDown',
+            customClass: 'animated zoomInDown sweet-confirmacion',
             showCancelButton: true,
             confirmButtonText: '¡Es lo que quiero!',
             cancelButtonText: 'Deseo Revisar',
@@ -353,7 +353,7 @@ export class CrearTiendaComponent implements OnInit {
       this.estado = "Estamos creando tu tienda";
       break;
       case 2:
-      this.estado = "Estamos aplicando la configuracion a tu tienda";
+      this.estado = "Aplicando la configuracion a tu tienda";
       break;
       case 3:
       this.estado = "Creando el dominio www."+this.formConfigTienda.value.url+".bixpro.co";

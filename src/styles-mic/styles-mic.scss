@@ -387,7 +387,7 @@ input:-webkit-autofill:active  {
           @include align-items(center);
           width:100%;
           margin:0 auto;
-          @include desktop-down {display: block;}
+          @include laptop-down {display: block;}
           @include tablet-down {display:block}
           
         }
@@ -427,7 +427,7 @@ input:-webkit-autofill:active  {
           flex: 1;
           height: 66px;
           position: relative;
-          top: -19px;
+          top: -17px;
           margin-bottom:0px;
           @include laptop-down {
             margin: 20px 0px;
@@ -457,7 +457,7 @@ input:-webkit-autofill:active  {
             .badge-error {background:none;color:$error;font-size:75%}
           }
           input {
-            height: 66px;
+            height: 62px;
             font-size:1.2rem;
             padding: 0px 10px;
             flex: 1;
@@ -548,7 +548,7 @@ input:-webkit-autofill:active  {
           border:2px dotted #efefef;
           @include laptop-down { padding: 20px 30px}
         }
-         .mat-form-field{display:block;@include desktop-down {width:90%;margin:0 auto};@include laptop-down {width:100%}}
+         .mat-form-field{display:block;@include desktop-down {width:100%;margin:0 auto};@include laptop-down {width:100%}}
          .mat-form-field-wrapper{padding-bottom: 20px;}
          textarea {resize: none;overflow-y:hidden;padding: 10px 0px;margin: 10px 0px;}
          .select .mat-form-field-wrapper {@include desktop-down{width:90%;margin:0 auto};;@include laptop-down {width:100%}}
@@ -627,7 +627,7 @@ input:-webkit-autofill:active  {
 
     /* SWAL */
     .swal2-popup .swal2-styled.swal2-confirm {
-      background-color: $negro!important;
+      background-color: $terciario!important;
   }
 
   .swal2-popup .swal2-styled:focus {box-shadow:none!important}
@@ -646,18 +646,18 @@ input:-webkit-autofill:active  {
     margin: 20px 0px !important;
     font-size: 95%;
   }
-  .sweet-confirmacion .swal2-content h4 {font-size:115%!important;color:$secundario!important}
+  .sweet-confirmacion .swal2-content h4 {font-size:115%!important;color:$negro!important}
   .sweet-confirmacion .swal2-content .field-info {
     background: #f3f3f3;
     padding: 2px;
     margin-bottom: 15px;
   }
 
-  .sweet-confirmacion .swal2-confirm {padding: 15px 30px !important;margin-right:10px!important;background:$primario!important}
+  .sweet-confirmacion .swal2-confirm {padding: 15px 30px !important;margin-right:10px!important;background:$terciario!important}
   .sweet-confirmacion .swal2-cancel {
-    color: #6c757d!important;
-    background-color: #edf0f3!important;
-    border-color: #a8bbce!important;
+    color: white!important;
+    background-color: $primario!important;
+    border-color: $primario!important;
     padding: 15px 30px !important;
   }
   .sweet-confirmacion .swal2-confirm:focus,
