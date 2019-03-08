@@ -18,10 +18,12 @@ export class CrearTiendaComponent implements OnInit {
   hideText = false;
   enviar = false;
   plantilla: any;
-  idUsuario : any;
-  nuevo : boolean;
-  datosEnviados :any;
-
+  idUsuario: any;
+  nuevo: boolean;
+  datosEnviados: any;
+  colorP = "#ff7653";
+  colorS = "#3264ef";
+  preset = "Colores Recomendados"
 
   @ViewChild('stepper') stepper: MatStepper;
   @ViewChild('url') url: ElementRef;
@@ -44,15 +46,16 @@ export class CrearTiendaComponent implements OnInit {
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ''
     });
-    this.initFormConfigTienda('', '', '','');
+    this.initFormConfigTienda('', '', '', '');
   }
 
-  initFormConfigTienda(nombre, descripcion, sector,url) {
+  initFormConfigTienda(nombre, descripcion, sector, url) {
     this.formConfigTienda = this._formBuilder.group({
       nombre: [nombre, Validators.compose([Validators.required, Validators.maxLength(25), Validators.minLength(4)])],
       descripcion: [descripcion, Validators.compose([Validators.required, Validators.maxLength(255)])],
-      url : [url,Validators.compose([Validators.required,Validators.maxLength(25), Validators.minLength(4)])],
-      color : [''],
+      url: [url, Validators.compose([Validators.required, Validators.maxLength(25), Validators.minLength(4)])],
+      colorP: [this.colorP],
+      colorS: [this.colorS],
       sector: [sector],
     });
   }
@@ -143,48 +146,48 @@ export class CrearTiendaComponent implements OnInit {
 
 
 
-  
+
   // Enviar prospecto;
   sendProspecto() {
     if (this.formProspecto.invalid) {
-     this.informarUsuario("Ops... ¡Algo esta mal!", "Faltan campos por llenar y/o estan invalidos", 'error');
-     return;
-   }
-   this.actionStepper("2pasos");
+      this.informarUsuario("Ops... ¡Algo esta mal!", "Faltan campos por llenar y/o estan inválidos", 'error');
+      return;
+    }
+    this.actionStepper("2pasos");
 
-   
-   /* this.datosEnviados = this.formProspecto.value;
+
+   /*  this.datosEnviados = this.formProspecto.value;
     this.TiendaBixproService.sendPetition(this.formProspecto.value, 'prospectosBixpro').subscribe((response: any) => {
-     Swal.close();
-     console.log(response);
-     this.informarUsuario(response.title, response.message, response.type);
-     switch (response.code) {
-       case -1:
-         console.log("Error -1");
-         console.log("No avanza");
-         break;
-       case 0:
-         console.log("Error 0");
-         //localStorage.setItem("nuevo","1");
-         this.nuevo = false;
-         this.idUsuario = response.id;
-         switch(response.estado){
-           case "Iniciando":
-           this.actionStepper("2pasos");
-           break;
-           case "Finalizado":
-           console.log("para finalizado");
-           break;
-         }
-         break;
-       case 1:
-         //localStorage.setItem("nuevo","0");
-         this.nuevo = true;
-         this.idUsuario = response.id;
-         this.actionStepper("2pasos");
-         break;
-     }
-   }); */
+      Swal.close();
+      console.log(response);
+      this.informarUsuario(response.title, response.message, response.type);
+      switch (response.code) {
+        case -1:
+          console.log("Error -1");
+          console.log("No avanza");
+          break;
+        case 0:
+          console.log("Error 0");
+          //localStorage.setItem("nuevo","1");
+          this.nuevo = false;
+          this.idUsuario = response.id;
+          switch (response.estado) {
+            case "Iniciando":
+              this.actionStepper("2pasos");
+              break;
+            case "Finalizado":
+              console.log("para finalizado");
+              break;
+          }
+          break;
+        case 1:
+          //localStorage.setItem("nuevo","0");
+          this.nuevo = true;
+          this.idUsuario = response.id;
+          this.actionStepper("2pasos");
+          break;
+      }
+    }); */
   }
 
   informarUsuario(title, html, type) {
@@ -213,19 +216,19 @@ export class CrearTiendaComponent implements OnInit {
     }
   }
 
-  setUrl(escribe,value?){
-    if(!escribe && !this["reemplazar"]){
+  setUrl(escribe, value?) {
+    if (!escribe && !this["reemplazar"]) {
       this.formConfigTienda.controls.url.setValue(this.clearSpaces(this.formConfigTienda.value.nombre));
     }
-    if(escribe){
+    if (escribe) {
       this["reemplazar"] = true;
       this.formConfigTienda.controls.url.setValue(this.clearSpaces(value));
     }
     this.url.nativeElement.value = this.formConfigTienda.value.url;
   }
 
-  clearSpaces(value){
-    return value.replace(/ /g,'').toLowerCase();
+  clearSpaces(value) {
+    return value.replace(/ /g, '').toLowerCase();
   }
 
   // Configuracion de tienda
@@ -236,11 +239,11 @@ export class CrearTiendaComponent implements OnInit {
       this.informarUsuario("¿No te falta algo?", "Escoge el sector al que pertenece tu tienda", "warning");
       return;
     }
-    
+
     if (this.plantilla == "T3") {
       this.formConfigTienda.controls["sector"].setValidators([Validators.compose([Validators.required])]);
       this.formConfigTienda.controls["sector"].updateValueAndValidity();
-    }else{
+    } else {
       this.formConfigTienda.controls["sector"].clearValidators();
       this.formConfigTienda.controls["sector"].updateValueAndValidity();
     }
@@ -251,7 +254,10 @@ export class CrearTiendaComponent implements OnInit {
     }
 
     let configuracion = this.formConfigTienda.value;
+    configuracion.colorP = this.colorP;
+    configuracion.colorS = this.colorS;
     configuracion.plantilla = this.plantilla;
+
     if (configuracion.plantilla != "T3") {
       delete configuracion.sector;
     }
@@ -261,6 +267,12 @@ export class CrearTiendaComponent implements OnInit {
       cancelButtonClass: 'btn btn-danger',
       buttonsStyling: false,
     })
+
+    console.log(configuracion);
+    
+    this.comprobarDominio("www"+configuracion.url+".bixpro.co");
+
+
 
     swalWithBootstrapButtons.fire({
       title: `¿Es lo que quieres?`,
@@ -289,12 +301,12 @@ export class CrearTiendaComponent implements OnInit {
       cancelButtonText: 'Deseo Revisar',
     }).then((result) => {
       if (result.value) {
-        this.sendPeticionTienda(configuracion);
+        //this.sendPeticionTienda(configuracion);
       }
     })
   }
 
-  sendPeticionTienda(confTienda){
+  sendPeticionTienda(confTienda) {
     this.TiendaBixproService.sendPetition(confTienda, 'crearTienda').subscribe((response: any) => {
       Swal.close();
       this.informarUsuario(response.title, response.message, response.type);
@@ -305,13 +317,19 @@ export class CrearTiendaComponent implements OnInit {
           break;
         case 0:
           console.log("Error 0");
-          
           break;
         case 1:
           this.actionStepper("2pasos");
           break;
       }
-    })
+    });
+  }
+
+  comprobarDominio(dominio) {
+    let request = new XMLHttpRequest();
+    request.open('GET', dominio, true);
+    request.send();
+    console.log(request);
   }
 
 }
