@@ -1,0 +1,56 @@
+.wrapper-loading {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background: white;
+    background: linear-gradient(1800deg, #ff623a, #ff886a);
+    z-index: 9;
+    width: 100%;
+    overflow: hidden!important;
+    
+    p {color:white; 
+    -webkit-animation: fade;
+    animation: fade;
+    -webkit-animation-duration: 5s;
+    animation-duration: 5s;
+    -webkit-animation-iteration-count: 4;
+    animation-iteration-count: 4;}
+    }
+    .loading{
+    margin: 0 0 2em;
+    height: 100px;
+    width: 50%;
+    text-align: center;
+    padding: 1em;
+    margin: 0 auto 1em;
+    display: inline-block;
+    vertical-align: top;
+    }
+    .wrapper-text {
+    text-align: center;
+    }
+    
+    @-webkit-keyframes fade {
+    0% { opacity: 1; filter:alpha(opacity=100); }
+    50% { opacity: 0; filter:alpha(opacity=0); }
+    100% { opacity: 1; filter:alpha(opacity=100); }
+    }
+    
+    @keyframes fade {
+    0% { opacity: 1; filter:alpha(opacity=100); }
+    50% { opacity: 0; filter:alpha(opacity=0); }
+    100% { opacity: 1; filter:alpha(opacity=100); }
+    }
+    
+    
+    /*
+    Set the color of the icon
+    */
+    svg path,
+    svg rect{
+    fill: #FF6700;
+    fill:white;
+    }

@@ -24,7 +24,9 @@ export class CrearTiendaComponent implements OnInit {
   colorP = "#ff7653";
   colorS = "#3264ef";
   preset = "Colores Recomendados"
-
+  configurando = false;
+  estado = "";
+  estadoNumero = 1;
   @ViewChild('stepper') stepper: MatStepper;
   @ViewChild('url') url: ElementRef;
 
@@ -47,6 +49,7 @@ export class CrearTiendaComponent implements OnInit {
       secondCtrl: ''
     });
     this.initFormConfigTienda('', '', '', '');
+    this.estado = "Estamos preparando tu tienda " + this.formConfigTienda.value.nombre;
   }
 
   initFormConfigTienda(nombre, descripcion, sector, url) {
@@ -234,6 +237,7 @@ export class CrearTiendaComponent implements OnInit {
   // Configuracion de tienda
 
   goToShop() {
+    this.configurando = false;
     this.enviar = true;
     if (!this.plantilla) {
       this.informarUsuario("¿No te falta algo?", "Escoge el sector al que pertenece tu tienda", "warning");
@@ -270,46 +274,62 @@ export class CrearTiendaComponent implements OnInit {
 
     console.log(configuracion);
     
-    this.comprobarDominio("www"+configuracion.url+".bixpro.co");
-
-
-
-    swalWithBootstrapButtons.fire({
-      title: `¿Es lo que quieres?`,
-      animation: false,
-      type: 'question',
-      showCloseButton: true,
-      html: `<div class="row">
-      <div class="col-12">
-        <strong>¡Estas a un paso! pero necesitamos que estes seguro de tu configuración, por eso te la mostramos a continuación:</strong>
-      </div>
-      <div class="col-12 mt-17">
-        <div class="card">
-          <div class="card-header">
-            www.${configuracion.url}.bixpro.co
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">Tu descripción es:</h5>
-            <p class="card-text">${configuracion.descripcion}</p>
-          </div>
-        </div>
-      </div>
-    </div>`,
-      customClass: 'animated zoomInDown',
-      showCancelButton: true,
-      confirmButtonText: '¡Es lo que quiero!',
-      cancelButtonText: 'Deseo Revisar',
-    }).then((result) => {
-      if (result.value) {
-        //this.sendPeticionTienda(configuracion);
+    let request = new XMLHttpRequest();
+    request.open('GET', "www."+configuracion.url+".bixpro.co", true);
+    //request.open('GET', "https://madeincol.com/", true);
+    request.send();
+    let cont = 0;
+    request.onreadystatechange = ()=>{
+      cont ++;
+      if(request.status === 404){
+        if(cont == 1){
+          swalWithBootstrapButtons.fire({
+            title: `¿Es lo que quieres?`,
+            animation: false,
+            type: 'question',
+            showCloseButton: true,
+            html: `<div class="row">
+            <div class="col-12">
+              <strong>¡Estas a un paso! pero necesitamos que estes seguro de tu configuración, por eso te la mostramos a continuación:</strong>
+            </div>
+            <div class="col-12 mt-17">
+              <div class="card">
+                <div class="card-header">
+                  www.${configuracion.url}.bixpro.co
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Tu descripción es:</h5>
+                  <p class="card-text">${configuracion.descripcion}</p>
+                </div>
+              </div>
+            </div>
+          </div>`,
+            customClass: 'animated zoomInDown',
+            showCancelButton: true,
+            confirmButtonText: '¡Es lo que quiero!',
+            cancelButtonText: 'Deseo Revisar',
+          }).then((result) => {
+            if (result.value) {
+              console.log("acepto");
+              this.sendPeticionTienda(configuracion);
+              this.configurando = true;
+              let interval = setInterval(() => {
+                this.updateEstado(this.estadoNumero);
+                if(this.estadoNumero == 7) clearInterval(interval);
+              }, 3000);
+            }
+          })
+        }
+      }else{
+        if(cont === 1) this.informarUsuario('¡Hey!',"Encontramos que ya existe una url www."+configuracion.url+".bixpro.co, intenta con otra url por favor","info");
       }
-    })
+    }
   }
 
   sendPeticionTienda(confTienda) {
     this.TiendaBixproService.sendPetition(confTienda, 'crearTienda').subscribe((response: any) => {
-      Swal.close();
-      this.informarUsuario(response.title, response.message, response.type);
+      console.log(response);
+      /* this.informarUsuario(response.title, response.message, response.type);
       switch (response.code) {
         case -1:
           console.log("Error -1");
@@ -321,15 +341,32 @@ export class CrearTiendaComponent implements OnInit {
         case 1:
           this.actionStepper("2pasos");
           break;
-      }
+      } */
     });
   }
 
-  comprobarDominio(dominio) {
-    let request = new XMLHttpRequest();
-    request.open('GET', dominio, true);
-    request.send();
-    console.log(request);
+  updateEstado(estado){
+    console.log("ingresa");
+    this.estadoNumero++;
+    switch (estado){
+      case 1:
+      this.estado = "Estamos creando tu tienda";
+      break;
+      case 2:
+      this.estado = "Estamos aplicando la configuracion a tu tienda";
+      break;
+      case 3:
+      this.estado = "Creando el dominio www."+this.formConfigTienda.value.url+".bixpro.co";
+      break;
+      case 4:
+      this.estado = "Actualizando el contenido de tu tienda";
+      break;
+      case 5:
+      this.estado = "Creando tus credenciales";
+      break;
+      case 6:
+      this.estado = "Ya casi esta todo listo";
+      break;
+    }
   }
-
 }

@@ -12,7 +12,7 @@ export class TiendaBixproService {
 
 
   sendPetition(data, url){
-    this.esperaUsuario();
+    if(url!="crearTienda")this.esperaUsuario();
     return this.httpClient.post(this.urlHTTP + '/' + url, {
       body: data,
     })
