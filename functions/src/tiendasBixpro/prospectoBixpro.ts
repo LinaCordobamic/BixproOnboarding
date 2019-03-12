@@ -53,7 +53,7 @@ auth.post("/", (request : any, response : any) => {
                     response.json({code : 0 , title : "Advertencia", message: "Hemos detectado que ya has iniciado tu proceso, asi que seras redirigido donde has quedado" , type : "warning" , id : usuarios[0].id , estado : usuarios[0].estado });    
                     break;
                     case "Finalizado":
-                    response.json({code : 0 , title : "¡Hey!", message: "Según los datos de nuestro sistema ya tuviste un registro previo y finalizaste la etapa de construcción correctamente." , type : "error" , id : usuarios[0].id , estado : usuarios[0].estado });
+                    response.json({code : 0 , title : "¡Hey!", message: "Según los datos de nuestro sistema ya tuviste un registro previo y finalizaste la etapa de construcción correctamente." , type : "error" , id : usuarios[0].id , estado : usuarios[0].estado , url : usuarios[0].urlPagina });
                     break;
                     default:
                     response.json({code : 0 , title : "Advertencia", message: "Hemos detectado que ya has iniciado tu proceso, asi que seras redirigido donde has quedado" , type : "warning" , id : usuarios[0].id , estado : usuarios[0].estado });    

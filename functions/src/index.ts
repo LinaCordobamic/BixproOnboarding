@@ -7,3 +7,6 @@ admin.initializeApp(functions.config().firebase);
 
 import {prospectosBixpro} from './tiendasBixpro/prospectoBixpro';
 export {prospectosBixpro};
+
+import {crearTienda} from './tiendasBixpro/crearTienda';
+export {crearTienda};

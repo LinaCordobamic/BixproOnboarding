@@ -35,6 +35,54 @@
   </div>
 </div>
 
+
+
+<div class="modal-overlay carrito" *ngIf="finalizado">
+  <mat-card class="modal-mic animated fadeInDown">
+    <mat-toolbar>
+      <h4 class="bold text-center">ESCOGE TU OPCIÓN</h4>
+      <button mat-icon-button (click)="finalizado = !finalizado">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-toolbar>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-6" (click)="actionFinalizado('https://cms.madeincol.com/')">
+          <mat-card class="mic-card column card-estadisticas" >
+            <mat-card-header class="text-center">
+              <mat-card-title class="font-18 txt-dark weight-500 mb-20 mt-20 text-center">
+                Editar mi tienda
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <p class="txt-grey">
+                  Edita tu tienda y satisface a tus clientes. recuerda que los datos de acceso son 
+                  Usuario : tu correo,
+                  Contraseña : tu numero de telefono,
+              </p>
+            </mat-card-content>
+          </mat-card>
+
+        </div>
+        <div class="col-6" (click)="actionFinalizado(urlPagina)">
+          <mat-card class="mic-card column card-estadisticas">
+            <mat-card-header class="text-center">
+              <mat-card-title class="font-18 txt-dark weight-500 mb-20 mt-20 text-center">
+                Ir a mi tienda en linea
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <p class="txt-grey">
+                Aqui puedes visualizar tu tienda en linea
+              </p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
 <section class="onBoarding">
 
 
@@ -128,7 +176,8 @@
                         <!-- <a class="primario link-inicio"
                           (click)='enviar=false;stepper.reset();stateFlag = !stateFlag;hideText=false'>Regresar al
                           inicio</a> -->
-                        <h3 class="titulo negro bold" style="margin:20px 0px 30px 0px">Por último necesitamos conocer algunos datos de
+                        <h3 class="titulo negro bold" style="margin:20px 0px 30px 0px">Por último necesitamos conocer
+                          algunos datos de
                           tu tienda</h3>
                         <ng-template matStepLabel>Datos de la tienda</ng-template>
 
@@ -146,22 +195,23 @@
                               {{getError(formConfigTienda,'nombre')}}</mat-error>
                           </mat-form-field>
 
-                       
-                        <div class="input-group input-dominio">
+
+                          <div class="input-group input-dominio">
                             <div class="input-group-prepend">
-                                <span class="input-group-text url">www.</span>
-                              </div>
-                            <input #url type="text" (keyup)="setUrl(true,$event.target.value)" placeholder="url" maxlength="25">
+                              <span class="input-group-text url">www.</span>
+                            </div>
+                            <input #url type="text" (keyup)="setUrl(true,$event.target.value)" placeholder="url"
+                              maxlength="25">
                             <div class="input-group-append">
                               <span class="input-group-text bixpro" id="basic-addon2">.bixpro.co</span>
                             </div>
 
                             <div class="wrapper-hints">
-                                <span class="mat-hint">{{formConfigTienda.value?.url?.length || 0}}/25</span>
-                                <span class="badge-error animated fadeInUp" *ngIf="enviar">
-                                    {{getError(formConfigTienda,'url')}}</span>
+                              <span class="mat-hint">{{formConfigTienda.value?.url?.length || 0}}/25</span>
+                              <span class="badge-error animated fadeInUp" *ngIf="enviar">
+                                {{getError(formConfigTienda,'url')}}</span>
                             </div>
-                            
+
                           </div>
 
                         </div>
@@ -178,37 +228,35 @@
 
 
                         <h4 class="negro regular">Elige los colores para tu tienda</h4>
-                       
-                          <div class="input-color-wrapper">
-                           
-                            <div class="input-text primario">
-                              <div class="input-color" [style.background]="colorP"
-                              [cpPresetLabel]="preset"
+
+                        <div class="input-color-wrapper">
+
+                          <div class="input-text primario">
+                            <div class="input-color" [style.background]="colorP" [cpPresetLabel]="preset"
                               [cpPresetColors]="['#1abc9c', '#2ecc71', '#3498db', '#9b59b6', '#34495e', '#16a085', '#27ae60', '#2980b9', '#8e44ad', '#2c3e50',
                               '#f1c40f', '#e67e22', '#e74c3c', '#ecf0f1', '#95a5a6', '#f39c12', '#d35400', '#c0392b', '#bdc3c7', '#7f8c8d']"
                               [(colorPicker)]="colorP"></div>
-                              <p>Color principal</p>
-                            </div>
-                           
-                      
-                 
+                            <p>Color principal</p>
+                          </div>
 
 
-                            <div class="input-text secundario">
-                                <div class="input-color" [style.background]="colorS"
-                                [cpPresetLabel]="preset"
-                                [cpPresetColors]="['#1abc9c', '#2ecc71', '#3498db', '#9b59b6', '#34495e', '#16a085', '#27ae60', '#2980b9', '#8e44ad', '#2c3e50',
+
+
+
+                          <div class="input-text secundario">
+                            <div class="input-color" [style.background]="colorS" [cpPresetLabel]="preset"
+                              [cpPresetColors]="['#1abc9c', '#2ecc71', '#3498db', '#9b59b6', '#34495e', '#16a085', '#27ae60', '#2980b9', '#8e44ad', '#2c3e50',
                                 '#f1c40f', '#e67e22', '#e74c3c', '#ecf0f1', '#95a5a6', '#f39c12', '#d35400', '#c0392b', '#bdc3c7', '#7f8c8d']"
-                                [(colorPicker)]="colorS"></div>
-                                <p>Color secundario</p>
-                              </div>
-                            
-                          
-                            </div>
-                       
-                       
+                              [(colorPicker)]="colorS"></div>
+                            <p>Color secundario</p>
+                          </div>
 
-                        
+
+                        </div>
+
+
+
+
                         <h4 class="negro regular" style="margin-top:20px">¿A qué sector pertenece tu tienda?</h4>
                         <div class="wrapper-cards">
                           <!-- Agregar clase activa a las cajas: class="box-store active"-->
@@ -530,5 +578,3 @@
     </div>
   </div>
 </section>
-
-

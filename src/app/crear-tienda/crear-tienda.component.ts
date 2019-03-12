@@ -22,11 +22,14 @@ export class CrearTiendaComponent implements OnInit {
   nuevo: boolean;
   datosEnviados: any;
   colorP = "#ff7653";
-  colorS = "#fffaf5";
+  colorS = "#16a085";
   preset = "Colores Recomendados"
   configurando = false;
+  finalizado = true;
   estado = "";
   estadoNumero = 1;
+  responde = false;
+  urlPagina : any;
   @ViewChild('stepper') stepper: MatStepper;
   @ViewChild('url') url: ElementRef;
 
@@ -156,10 +159,9 @@ export class CrearTiendaComponent implements OnInit {
       this.informarUsuario("Ops... ¡Algo esta mal!", "Faltan campos por llenar y/o están inválidos", 'error');
       return;
     }
-    this.actionStepper("2pasos");
 
 
-   /*  this.datosEnviados = this.formProspecto.value;
+    this.datosEnviados = this.formProspecto.value;
     this.TiendaBixproService.sendPetition(this.formProspecto.value, 'prospectosBixpro').subscribe((response: any) => {
       Swal.close();
       console.log(response);
@@ -180,6 +182,9 @@ export class CrearTiendaComponent implements OnInit {
               break;
             case "Finalizado":
               console.log("para finalizado");
+
+              this.finalizado = true;
+              this.urlPagina = response.url;
               break;
           }
           break;
@@ -190,7 +195,7 @@ export class CrearTiendaComponent implements OnInit {
           this.actionStepper("2pasos");
           break;
       }
-    }); */
+    });
   }
 
   informarUsuario(title, html, type) {
@@ -276,7 +281,6 @@ export class CrearTiendaComponent implements OnInit {
     
     let request = new XMLHttpRequest();
    request.open('GET', "www."+configuracion.url+".bixpro.co", true);
-   // request.open('GET', "https://madeincol.com/", true);
     request.send();
     let cont = 0;
     request.onreadystatechange = ()=>{
@@ -315,7 +319,7 @@ export class CrearTiendaComponent implements OnInit {
               this.configurando = true;
               let interval = setInterval(() => {
                 this.updateEstado(this.estadoNumero);
-                if(this.estadoNumero == 7) clearInterval(interval);
+                if(this.estadoNumero > 6 && this.responde)  clearInterval(interval);
               }, 3000);
             }
           })
@@ -327,26 +331,29 @@ export class CrearTiendaComponent implements OnInit {
   }
 
   sendPeticionTienda(confTienda) {
-    this.TiendaBixproService.sendPetition(confTienda, 'crearTienda').subscribe((response: any) => {
-      console.log(response);
-      /* this.informarUsuario(response.title, response.message, response.type);
-      switch (response.code) {
-        case -1:
-          console.log("Error -1");
-          console.log("No avanza");
-          break;
-        case 0:
-          console.log("Error 0");
-          break;
-        case 1:
-          this.actionStepper("2pasos");
-          break;
-      } */
-    });
+    this.responde = false;
+    confTienda.id = this.idUsuario;
+    confTienda.correo = this.formProspecto.value.correo;
+    confTienda.telefono = this.formProspecto.value.telefono.toString();
+    if(!confTienda.id){
+      this.informarUsuario('¡Hey!',"Encontramos un error con respecto a tu registro , recarga la pagina e intenta nuevamente","error");
+      return;
+    };
+      this.TiendaBixproService.sendPetition(confTienda, 'crearTienda').subscribe((response: any) => {
+      this.responde = true;
+      switch(response.code){
+        case 0 :
+         
+        break;
+        case 1: 
+        this.finalizado = true;
+        this.urlPagina = response.url;
+        break;
+      }
+    });  
   }
 
   updateEstado(estado){
-    console.log("ingresa");
     this.estadoNumero++;
     switch (estado){
       case 1:
@@ -367,6 +374,16 @@ export class CrearTiendaComponent implements OnInit {
       case 6:
       this.estado = "Ya casi esta todo listo";
       break;
+      default :
+      this.estado = "Ya casi esta todo listo";
+      break;
     }
+    if(this.estadoNumero > 6 && this.responde){
+      this.configurando = false;
+    }
+  }
+
+  actionFinalizado(url){
+    window.open(url);
   }
 }
