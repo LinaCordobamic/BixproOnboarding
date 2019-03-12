@@ -40,40 +40,42 @@
 <div class="modal-overlay carrito" *ngIf="finalizado">
   <mat-card class="modal-mic animated fadeInDown">
     <mat-toolbar>
-      <h4 class="bold text-center">ESCOGE TU OPCIÓN</h4>
+      <h2 class="bold text-center">Escoge una opción</h2>
       <button mat-icon-button (click)="finalizado = !finalizado">
         <mat-icon>close</mat-icon>
       </button>
     </mat-toolbar>
     <mat-card-content>
       <div class="row">
-        <div class="col-6" (click)="actionFinalizado('https://cms.madeincol.com/')">
-          <mat-card class="mic-card column card-estadisticas" >
-            <mat-card-header class="text-center">
-              <mat-card-title class="font-18 txt-dark weight-500 mb-20 mt-20 text-center">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12" (click)="actionFinalizado('https://cms.madeincol.com/')">
+          <mat-card class="mic-card column" >
+            <img src="../../assets/imagenes/editar-tienda.svg">
+            <mat-card-header>
+              <mat-card-title class="primario underline bold">
                 Editar mi tienda
               </mat-card-title>
             </mat-card-header>
             <mat-card-content>
-              <p class="txt-grey">
-                  Edita tu tienda y satisface a tus clientes. recuerda que los datos de acceso son 
-                  Usuario : tu correo,
-                  Contraseña : tu numero de telefono,
+              <p class="gris">
+                  Edita tu tienda y satisface a tus clientes. recuerda que los datos de acceso son: <br><br>
+                  <span class="negro"><strong>Usuario : tu correo electrónico</strong></span><br>
+                  <span class="negro"><strong>Contraseña : tu número de teléfono</strong></span>
               </p>
             </mat-card-content>
           </mat-card>
 
         </div>
-        <div class="col-6" (click)="actionFinalizado(urlPagina)">
-          <mat-card class="mic-card column card-estadisticas">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12" (click)="actionFinalizado(urlPagina)">
+          <mat-card class="mic-card column">
+              <img src="../../assets/imagenes/ver-tienda.svg">
             <mat-card-header class="text-center">
-              <mat-card-title class="font-18 txt-dark weight-500 mb-20 mt-20 text-center">
+              <mat-card-title class="primario underline bold">
                 Ir a mi tienda en linea
               </mat-card-title>
             </mat-card-header>
             <mat-card-content>
-              <p class="txt-grey">
-                Aqui puedes visualizar tu tienda en linea
+              <p class="gris">
+                Aqui puedes visualizar tu tienda en línea, con las configuraciones que hayas seleccionado
               </p>
             </mat-card-content>
           </mat-card>
