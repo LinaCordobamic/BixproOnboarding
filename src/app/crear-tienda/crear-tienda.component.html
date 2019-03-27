@@ -1,5 +1,6 @@
 <div class="wrapper-loading change-bg-color" *ngIf="configurando">
   <div class="loading loading--style8" title="Cargando">
+
     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
       x="0px" y="0px" width="44px" height="50px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;"
       xml:space="preserve">
@@ -28,6 +29,7 @@
           repeatCount="indefinite" />
       </rect>
     </svg>
+
   </div>
 
   <div class="wrapper-text">
@@ -48,7 +50,7 @@
     <mat-card-content>
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 col-12" (click)="actionFinalizado('https://cms.madeincol.com/')">
-          <mat-card class="mic-card column" >
+          <mat-card class="mic-card column">
             <img src="../../assets/imagenes/editar-tienda.svg">
             <mat-card-header>
               <mat-card-title class="primario underline bold">
@@ -86,6 +88,7 @@
 </div>
 
 <section class="onBoarding">
+   
 
 
   <div [ngClass]="{ 'container' : !stateFlag , 'container-fluid' : stateFlag }">
@@ -93,7 +96,14 @@
       <div class="col-sm-12 col-12 col-form"
         [ngClass]="{ 'col-lg-12 col-md-12 text-center' : !stateFlag , 'col-lg-7 col-md-12' : stateFlag }">
 
+      
+
         <div class="wrapper">
+          <div class="wrapper-ir-tienda">
+              <p class="negro bold text-tienda">¿Ya tienes una tienda creada?</p>
+              <button mat-button class="btn btn-outline-primario ir-tienda">Ir a mi tienda en línea <mat-icon matSuffix>arrow_forward</mat-icon></button>
+          </div>
+     
 
           <img alt="Bixpro, la forma fácil y segura de vender en internet" class="logo animated fadeInUp"
             src="./assets/imagenes/logov2.svg">
@@ -121,7 +131,7 @@
                         <mat-form-field appearance="fill">
                           <mat-label>Correo electrónico</mat-label>
                           <input ngModel matInput placeholder="micorreo@correo.com" formControlName="correo">
-                          <mat-icon matSuffix class="input-icon">mail</mat-icon>
+                          <mat-icon matSuffix class="input-icon">mail_outline</mat-icon>
                           <mat-error class="badge badge-pill badge-danger animated fadeInUp" *ngIf="enviar">
                             {{getError(formProspecto,'correo')}}</mat-error>
                           <mat-icon class="check-icon animated fadeInUp" matSuffix
@@ -148,7 +158,15 @@
 
                       <div class="wrapper-nav-buttons">
                         <button mat-button class="btn btn-secundario" (click)='sendProspecto()'>Crear mi tienda</button>
+                     
+                   
+                
+
                       </div>
+
+                    
+                   
+
                     </form>
                   </mat-step>
                   <mat-step [stepControl]="secondFormGroup">
@@ -316,8 +334,8 @@
 
                   <div style="text-align:center">
 
-                    <owl-carousel-o [options]="customOptions">
-                      <ng-template carouselSlide>
+                    <owl-carousel-o class="carousel-uno" [options]="customOptions">
+                     <!--<ng-template carouselSlide>
                         <div class="tarjeta">
                           <div class="encabezado">
                             <img alt="Planes Bixpro para tu tienda en línea"
@@ -325,8 +343,7 @@
                             <h3 class="titulo">Plan Descubre</h3>
                             <p class="precio">$0 /<span>mes</span></p>
 
-                            <p class="adicional">Servicios adicionales</p>
-                            <p class="dominio"><span>Dominio.com $119.000</span> </p>
+                      
 
                           </div>
                           <ul class="lista">
@@ -358,20 +375,27 @@
                               <mat-icon>perm_identity</mat-icon>Gestiona hasta 1 usuario
                             </li>
 
+                            <li><mat-icon>store_mall_directory</mat-icon>Adicionales: Dominio.com por $119.000</li>
+                           
 
                           </ul>
+
+                        
                         </div>
-                      </ng-template>
+                      </ng-template>--> 
+
+
                       <ng-template carouselSlide>
                         <div class="tarjeta">
                           <div class="encabezado">
                             <img alt="Planes Bixpro para tu tienda en línea"
                               src="../../assets/imagenes/plan-emprende.svg">
                             <h3 class="titulo">Plan Emprende</h3>
-                            <p class="precio">$55.000 /<span>mes</span></p>
-
-                            <p class="adicional">Servicios adicionales</p>
-                            <p class="dominio"><span>Dominio.com $119.000</span> </p>
+                            <p class="precio" [innerHtml]="tiempoSeleccionadoemprende"></p>
+                              <select [(ngModel)]="tiempoSeleccionadoemprende" class="form-control">
+                                  <option *ngFor="let plan of planemprende" [value]="plan.precio">{{plan.id}}</option>
+                              </select>
+                          
                           </div>
                           <ul class="lista">
                             <li>
@@ -402,6 +426,9 @@
                               <mat-icon>perm_identity</mat-icon>Gestiona hasta 2 usuarios
                             </li>
 
+                            <li><mat-icon>store_mall_directory</mat-icon>Adicionales: Dominio.com por $119.000</li>
+
+
 
                           </ul>
                         </div>
@@ -412,11 +439,11 @@
                             <img alt="Planes Bixpro para tu tienda en línea"
                               src="../../assets/imagenes/plan-avanza.svg">
                             <h3 class="titulo">Plan Avanza</h3>
-                            <p class="precio">$80.000 / <span>mes</span></p>
-
-                            <p class="adicional">Servicios adicionales</p>
-                            <p class="dominio"><span>Dominio.com $119.000</span> </p>
-
+                            <p class="precio"[innerHtml]="tiempoSeleccionadoavanza"></p>
+                            <select [(ngModel)]="tiempoSeleccionadoavanza" class="form-control">
+                                <option *ngFor="let plan of planavanza" [value]="plan.precio">{{plan.id}}</option>
+                            </select>
+                        
                           </div>
                           <ul class="lista">
                             <li>
@@ -450,6 +477,9 @@
                               <mat-icon>perm_identity</mat-icon>Pasarela de pagos (Epayco - Paypal)
                             </li>
 
+                            <li><mat-icon>store_mall_directory</mat-icon>Adicionales: Dominio.com por $119.000</li>
+
+
 
                           </ul>
                         </div>
@@ -463,11 +493,11 @@
                             <img alt="Planes Bixpro para tu tienda en línea"
                               src="../../assets/imagenes/plan-premium.svg">
                             <h3 class="titulo">Plan Premium</h3>
-                            <p class="precio">$120.000 / <span>mes</span></p>
-
-                            <p class="adicional">Servicios adicionales</p>
-                            <p class="dominio"><span>Dominio.com $119.000</span> </p>
-
+                            <p class="precio" [innerHtml]="tiempoSeleccionadopremium"></p>
+                            <select [(ngModel)]="tiempoSeleccionadopremium" class="form-control">
+                                <option *ngFor="let plan of planpremium" [value]="plan.precio">{{plan.id}}</option>
+                            </select>
+                           
                           </div>
                           <ul class="lista">
                             <li>
@@ -500,6 +530,9 @@
                             <li class="no-border-b">
                               <mat-icon>perm_identity</mat-icon>Pasarela de pagos (Epayco - Paypal)
                             </li>
+
+                            <li><mat-icon>store_mall_directory</mat-icon>Adicionales: Dominio.com por $119.000</li>
+
 
 
                           </ul>

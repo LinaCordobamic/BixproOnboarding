@@ -1,56 +1,24 @@
 
 @import 'assets/fonts/feather/style.min.css';
-@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700,800,900');
+@import url('https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800,900');
 @import './mixins';
 
 
-  /** Black */
-  @font-face {
-    font-family: "Circular";
-    font-weight: 900;
-    src: url("/../assets/fonts/circular/CircularStd-Black.otf");
-  }
-  
-
-    /** Bold */
-    @font-face {
-        font-family: "Circular";
-        font-weight: 700;
-        src: url("/../assets/fonts/circular/CircularStd-Bold.otf");
-      }
-      
-    /** Medium*/
-    @font-face {
-        font-family: "Circular";
-        font-weight: 600;
-        src: url("/../assets/fonts/circular/CircularStd-Medium.otf");
-      }
-      
-    /** Book */
-    @font-face {
-        font-family: "Circular";
-        font-weight: 400;
-        src: url("/../assets/fonts/circular/CircularStd-Book.otf");
-      }
-  
-      
     $primario: #ff7653;
     $secundario: #3264ef;
     $secundario-claro: #6c93ff;
     $terciario:     #25da6f;
     $negro: #313346;
     $gris:  #6b6f8e;
-    $error: #ef3276 ;
+    $error: #0d4dff ;
 
-
- 
-    $font-family-main: "Circular";
+    $font-family-main: 'Nunito', sans-serif;
     html {--font-size: 1!important}
     body {
     font-family: $font-family-main;
-    font-size: calc(var(--font-size) * 1.2em)!important;
+    font-size: calc(var(--font-size) * 1em)!important;
     overflow-x: hidden;
-    @include desktop-down {  font-size: calc(var(--font-size) * 1.1em)!important;}
+    @include desktop-down {font-size: calc(var(--font-size) * .95em)!important;}
     }
 
     h1,h2,h3,h4,h5,h6,p,ul,li,span,a,button,div {
@@ -111,9 +79,10 @@ input:-webkit-autofill:active  {
 }
 
 .btn {
-  span {font-size:1.1rem!important;}
-  padding: 10px 30px!important;
-  @include smartphone-down {padding:5px 20px!important}
+  span {font-size:1rem;}
+  padding: 10px 25px!important;
+  :focus {  box-shadow:none!important;}
+  @include desktop-down {padding:8px 20px!important}
 }
 .btn-primario {
   background:$primario;
@@ -122,7 +91,20 @@ input:-webkit-autofill:active  {
 }
 .btn-secundario {
  background:$secundario;
- 
+  span {color:white}
+}
+
+.btn-outline-primario {
+  background:none;
+  line-height: 24px!important;
+  border:1px solid $primario!important;
+   span {color:$primario;font-weight:600}
+ }
+
+ .btn-outline-primario:hover {
+  background:$primario;
+  border:1px solid $primario!important;
+  box-shadow:none!important;
   span {color:white}
 }
 
@@ -130,7 +112,7 @@ input:-webkit-autofill:active  {
   @include smartphone-down{margin-right:0px!important;margin-bottom:10px!important;width:100%!important}}
 
 .check-icon {color:$terciario!important;font-weight:900}
-.input-icon {color:#cecece!important}
+.input-icon {color:$gris!important}
 .edit .mat-form-field-suffix {top:-60px!important}
 .edit .mat-form-field-infix {padding: 1rem 0rem;}
  /* ONBOARDING*/
@@ -141,9 +123,14 @@ input:-webkit-autofill:active  {
 
     .onBoarding {
         position: relative;
-        background: #fcfdff;
+        background: white;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+
         @include tablet-down {height:auto;padding:2rem 0rem}
-        .row {align-items: center;height:100vh}
+        .row {align-items: center;    min-height: 100vh;}
         .col-form {
             @include transition-slow;
           
@@ -166,6 +153,7 @@ input:-webkit-autofill:active  {
           background-size:cover;
           background-position: center center;
           height: 100vh; 
+          @include desktop-down {height:120vh}
         }
 
         .bg-slide-2 {
@@ -173,6 +161,7 @@ input:-webkit-autofill:active  {
           background-size:cover;
           background-position: center center;
           height: 100vh; 
+          @include desktop-down {height:120vh}
         }
 
         .bg-slide-3 {
@@ -180,6 +169,7 @@ input:-webkit-autofill:active  {
           background-size:cover;
           background-position: center center;
           height: 100vh; 
+          @include desktop-down {height:120vh}
         }
 
         .caption {
@@ -197,8 +187,9 @@ input:-webkit-autofill:active  {
           width:100%!important
         }
 
-        .carousel-dos .owl-theme .owl-dots .owl-dot.active span {
-          background:$secundario
+        .carousel-dos .owl-theme .owl-dots .owl-dot.active span,
+        .carousel-uno .owl-theme .owl-dots .owl-dot.active span {
+          background:$primario!important
         }
 
   
@@ -212,19 +203,28 @@ input:-webkit-autofill:active  {
         text-align: center;
         font-size: 80%;
         margin-top:2rem;
+        @include desktop-down {margin-top:0rem}
         @include tablet-down {display:none}
         a {@include transition-slow;color:$primario}
        }
 
        .wrapper {
-         margin:5rem;
+         margin:2rem 5rem;
          position: relative;
-         @include desktop-down {padding:1rem;text-align: center;margin:1.5rem}
+         .wrapper-ir-tienda {
+           width:100%;
+           margin-bottom:2rem;
+           @include desktop-down {margin-bottom:1rem}
+          .text-tienda {margin-bottom:2px;margin-top:1rem;font-weight:700}
+          .link-tienda mat-icons{margin-left:5px}
+         }
+      
+
+         @include desktop-down {padding:1rem;text-align: center;margin:0rem 1.5rem}
          @include laptop-down {margin:2rem}
          @include smartphone-down {padding:0rem;margin:0rem}
-         .titulo {color:$negro;margin:1rem 0rem 1rem 0rem;font-weight:600;
-          @include desktop-down{margin:2rem 0rem 1rem 0rem;line-height: 1.1;}
-          @include smartphone-down {font-size:130%}
+         .titulo {color:$negro;margin:1rem 0rem .4rem 0rem;font-weight:600;
+          @include desktop-down{margin:1rem 0rem .2rem 0rem;line-height: 1.1;font-size:130%}
         }
          .subtitulo {
            color:$gris;margin-bottom:3rem;
@@ -239,7 +239,7 @@ input:-webkit-autofill:active  {
           }
           ngb-tabset {width:100%;}
           ngb-tabset .tab-content {
-            padding-top:3rem;
+            padding-top:1.5rem;
             height:auto;
             border: none;
             @include desktop-down{padding-top:1rem;height:auto}}
@@ -294,6 +294,7 @@ input:-webkit-autofill:active  {
 
           .wrapper-nav-buttons {
             text-align: center;
+
             @include laptop-down {background:white}
           }
           .btn-secundario {@include smartphone-down {width:100%}}
@@ -307,8 +308,9 @@ input:-webkit-autofill:active  {
        
       
        }/* FIN WRAPPER*/
+       .mat-form-field-label {font-weight:800!important}
        .mat-form-field.mat-focused .mat-form-field-label {color:$gris}
-      .mat-form-field-flex {border-radius:4px!important;@include transition-slow}
+       .mat-form-field-flex {border-radius:4px!important;@include transition-slow}
        .mat-form-field-suffix {@include flexbox; mat-icon:first-child {margin-right:10px}}
        .mat-form-field-suffix .mat-icon {
          @include smartphone-down {
@@ -322,9 +324,9 @@ input:-webkit-autofill:active  {
        .mat-focused .mat-form-field-flex {border:none;box-shadow: 0 0 0 1px #c4cdd5;}
        .form-step-one {
          background:white;
-         padding: 25px 35px;
+         padding: 25px 5px;
          @include desktop-down {padding: 25px 30px;}
-         .aviso {font-size:80%;color:$gris;margin-bottom:0px;margin-top:10px}
+         .aviso {font-size:90%;color:$gris;margin-bottom:5px;margin-top:10px;@include desktop-down {font-size:80%}}
           .form-group {  position: relative;}
           .mat-form-field-infix {color:$primario}
          .form-group img {position: absolute;top: 22%;width: 30px;}
@@ -342,7 +344,8 @@ input:-webkit-autofill:active  {
           }
     
           .mat-form-field-suffix {color: rgba(70, 70, 70, 0.2);}
-          .mat-form-field.mat-form-field-invalid .mat-form-field-label {color: $error!important;}
+          .mat-form-field-label {color:$gris!important}
+          .mat-form-field.mat-form-field-invalid .mat-form-field-label {color: $gris!important;}
           .mat-form-field-appearance-legacy .mat-form-field-suffix .mat-icon {color:#76ffa7}
           .mat-form-field-appearance-legacy .mat-form-field-label {color: $gris}
           .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {color: $primario}
@@ -422,7 +425,7 @@ input:-webkit-autofill:active  {
         .input-text p {font-size:80%}
 
 
-
+      
         .dominio {color:$primario;font-weight:600}
         .input-dominio  {
           flex: 1;
@@ -477,6 +480,8 @@ input:-webkit-autofill:active  {
           border-color:$primario;
           border-radius: 0px 5px 5px 0px;
         }
+
+   
   
         .mat-form-field.mat-form-field-invalid .mat-form-field-label,
         .mat-form-field-invalid .mat-input-element {color:$error!important}
@@ -571,7 +576,8 @@ input:-webkit-autofill:active  {
           text-align: left;
           margin:8px;
           background: white;
-          box-shadow: 0px 0px 12px #d6d9e4;
+          border:1px solid #d6d9e4;
+          box-shadow: none;
           @include smartphone-down {
             display:block;
             border-radius: 0px;
@@ -585,10 +591,12 @@ input:-webkit-autofill:active  {
             width: 50px;
             @include smartphone-down {margin:0 auto}
            }
-          .titulo {color:$negro;font-weight:800;margin:0px;margin-top:10px;margin-bottom:0px}
-          .precio {color:$gris;font-size:135%;margin-top:0px;font-weight:400; span {font-size:80%;font-weight:300}}
+          .titulo {color:$gris;font-weight:800;margin:0px;margin-top:10px;margin-bottom:0px}
+          .precio {color:$negro;font-size:135%;margin-top:0px;font-weight:800;line-height: 20px; span {color:$primario;font-size:70%;font-weight:400}}
           .adicional {margin-top:10px;color:$primario;margin-bottom:0px;font-size:80%}
           .dominio {color:$gris;font-size:80%}
+          .form-control {border:1px solid $primario!important;color:$negro!important;font-weight:800}
+          .form-control:focus {box-shadow:none!important}
           flex:1;
           margin-right:3rem;
           padding-left:2rem;
@@ -890,8 +898,8 @@ input:-webkit-autofill:active  {
     display:inline-block;
     text-align:center;
     button {position: absolute;right: 0%;top:0%; 
-      mat-icon {color:$gris;font-size:45px;position: relative;
-      top: -3px;
+      mat-icon {color:$primario;font-size:45px;position: relative;
+      top: -5px;
       @include smartphone-down {
         font-size: 30px;
         position: relative;
@@ -916,12 +924,10 @@ margin-bottom:10px!important;
 padding: 30px 20px!important;
 cursor:pointer!important;
 border-radius:10px!important;
-border:1px solid #eaecf1!important;
 transition: all 0.4s ease-in-out!important;
 &:hover {
-  transform: scale(1.03);
-  border:1px solid #eaecf1!important;
-  background:#f8f8f8;
+  transform: scale(1.01);
+  background:#f5f5f5;
 }
 img {width:80px;height:auto;margin-bottom:10px;@include smartphone-down{width:40px}}
 @include tablet-down {height:auto!important;margin-bottom:2rem!important}

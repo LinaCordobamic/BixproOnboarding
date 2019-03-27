@@ -39,6 +39,29 @@ export class CrearTiendaComponent implements OnInit {
   }
 
 
+  /* PRECIOS PLANES */
+  planemprende = [
+    {id:'Trimestral', precio:'$165.000 COP'},
+    {id:'Semestral -5%', precio:'$313.500 COP <br><span><strike>Sin descuento $330.000 COP</strike></span>'},
+    {id:'Anual -10%', precio:'$594.000 COP <br><span><strike>Sin descuento $660.000 COP</strike></span>'},
+];
+tiempoSeleccionadoemprende = '$165.000 COP';
+
+
+planavanza = [
+  {id:'Trimestral', precio:'$240.000 COP'},
+  {id:'Semestral -5%', precio:'$456.000 COP <br><span><strike>Sin descuento $480.000 COP</strike></span>'},
+  {id:'Anual -10%', precio:'$864.000 COP <br><span><strike>Sin descuento $960.000 COP</strike></span>'},
+];
+tiempoSeleccionadoavanza = '$240.000 COP';
+
+
+planpremium = [
+  {id:'Trimestral', precio:'$360.000 COP'},
+  {id:'Semestral -5%', precio:'$684.000 COP <br><span><strike>Sin descuento $720.000 COP</strike></span>'},
+  {id:'Anual -10%', precio:'$1.296.000 COP <br><span><strike>Sin descuento $1440.000 COP</strike></span>'},
+];
+tiempoSeleccionadopremium = '$360.000 COP';
   /* VALIDATION*/
 
   ngOnInit() {
@@ -74,7 +97,7 @@ export class CrearTiendaComponent implements OnInit {
     touchDrag: true,
     pullDrag: true,
     dots: true,
-    autoplay: true,
+    autoplay: false,
     autoplayTimeout: 5500,
     navSpeed: 700,
     navText: ['', ''],
@@ -258,7 +281,7 @@ export class CrearTiendaComponent implements OnInit {
     }
 
     if (this.formConfigTienda.invalid) {
-      this.informarUsuario("¿No te falta algo?", "Revisa muy bien los campos antes de enviar la solicitud.", "warning");
+      this.informarUsuario("¿No te falta algo?", "Revisa muy bien los campos Sin descuento de enviar la solicitud.", "warning");
       return;
     }
 
